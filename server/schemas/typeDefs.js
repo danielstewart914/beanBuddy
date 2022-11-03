@@ -8,6 +8,28 @@ const typeDefs = gql`
     password: String
   }
 
+  type Coffee {
+    _id: ID
+    brand: String
+    name: String
+    roast: String
+    beanType: String
+    origin: String
+    flavorProfile: String //will be changed
+    rating: Int
+    reviews: [Review]
+  }
+
+  type Review {
+    _id: ID
+    coffee: Coffee
+    coffeeRating: Int
+    reviewText: String
+    image: String
+    flavorProfile: String //will be changed
+    user: User
+  }
+
   type Auth {
     token: ID!
     user: User
