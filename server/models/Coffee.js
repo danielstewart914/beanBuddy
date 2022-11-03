@@ -34,13 +34,7 @@ const coffeeSchema = new Schema({
     },
     
     reviews: [Reviews]
-},
-    {
-        toJSON: {
-            virtuals: true,
-        },
-    }
-);
+});
 
 const Coffee = model('Coffee', coffeeSchema);
 

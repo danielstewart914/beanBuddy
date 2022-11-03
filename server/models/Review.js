@@ -41,12 +41,13 @@ const reviewSchema = new Schema({
     //         ref: 'Comment',
     //     },
     // ],
-}),
+},
     {
-        toJSON: {
-            virtuals: true,
+    toJSON: {
+        virtuals: true,
         },
-        ;
+    }
+);
 
 const Review = model('Review', reviewSchema);
 
