@@ -1,10 +1,9 @@
 const { Schema, model } = require('mongoose');
 
-const reviewSchema = new Schema({
-    coffee: {
-        type: Schema.Types.ObjectId,
-        ref: 'Coffee',
-    },
+const flavorProfileSchema = require( './FlavorProfile' );
+
+const reviewSchema = new Schema(
+  {
     coffeeRating: {
         type: Number,
         required: true,
@@ -22,7 +21,7 @@ const reviewSchema = new Schema({
     },
     reviewText: {
         type: String,
-        required: false,
+        required: true,
         trim: true,
     },
     image: {
@@ -30,23 +29,14 @@ const reviewSchema = new Schema({
         required: false,
         trim: true,
     },
-    flavorProfile: [flavorProfile],
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    },
-    // comments: [
-    //     {
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'Comment',
-    //     },
-    // ],
-},
-    {
+    flavorProfile: flavorProfileSchema,
+  },
+  {
     toJSON: {
-        virtuals: true,
-        },
+      virtuals: true,
+      id: false
     }
+  }
 );
 
 const Review = model('Review', reviewSchema);
