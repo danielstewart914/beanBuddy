@@ -1,11 +1,11 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const flavorProfileSchema = require( './FlavorProfile' );
 
 const { 
   reduceArrayToMeanObject, 
   reduceNestedObjects, 
-  blankFullProfile, 
-  blankSimpleProfile 
+  blankFullProfile
 } = require( '../utils/flavorUtils' );
 
 const userSchema = new Schema(
@@ -27,6 +27,10 @@ const userSchema = new Schema(
       required: true,
       minlength: 5,
     },
+    flavorSettings: {
+      type: flavorProfileSchema,
+      default: blankFullProfile
+    },
     reviews: [
       { 
         type: Schema.Types.ObjectId,
@@ -46,10 +50,11 @@ userSchema.virtual( 'fullFlavorProfile' ).get( async function () {
   if ( this.reviews.length ) {
     // map array of flavorProfiles from reviews
     const flavorProfiles = this.reviews.map( review => review.flavorProfile.toJSON() );
+    flavorProfiles.push( this.flavorSettings.toJSON() );
     // return single object with mean value of each flavor
     return reduceArrayToMeanObject( flavorProfiles );
   } else {
-    return blankFullProfile;
+    return this.flavorSettings;
   }
 } );
 
@@ -57,10 +62,11 @@ userSchema.virtual( 'simpleFlavorProfile' ).get( async function () {
   if ( this.reviews.length ) {
     // map array of flavorProfiles from reviews
     const flavorProfiles = this.reviews.map( review => review.flavorProfile.toJSON() );
+    flavorProfiles.push( this.flavorSettings.toJSON() );
     // return a reduced object with subObjects consolidated into single values
     return reduceNestedObjects( reduceArrayToMeanObject( flavorProfiles ) );
   } else {
-    return blankSimpleProfile;
+    return reduceNestedObjects( this.flavorSettings.toJSON() );
   }
 } );
 
