@@ -5,7 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate( 'reviews' );
+      return await User.find({}).populate( 'reviews' );
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate( 'reviews' );
@@ -15,12 +15,6 @@ const resolvers = {
         return User.findOne({ _id: context.user._id }).populate( 'reviews' );
       }
       throw new AuthenticationError('You need to be logged in!');
-    },
-    allCoffee: async () => {
-      return Coffee.find().populate( 'reviews' );
-    },
-    coffee: async (parent, { id }) => {
-      return Coffee.findOne({ _id: id }).populate( 'reviews' );
     },
   },
 

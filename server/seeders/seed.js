@@ -1,13 +1,37 @@
 const db = require('../config/connection');
-const { User } = require('../models');
+const { User, Coffee, Review } = require('../models');
 const userSeeds = require('./userSeeds.json');
+const coffeeSeeds = require( './coffeeSeeds.json' );
+const reviewSeeds = require( './reviewSeeds.json' );
+
+const randomElement = ( array ) => {
+  return array[ Math.floor( ( Math.random() * array.length ) ) ]
+}
 
 db.once('open', async () => {
   try {
     // await Thought.deleteMany({});
     await User.deleteMany({});
+    await Coffee.deleteMany({});
+    await Review.deleteMany({});
 
-    await User.create(userSeeds);
+    const users = await User.create(userSeeds);
+    const coffees = await Coffee.create(coffeeSeeds);
+    const reviews = await Review.create(reviewSeeds);
+
+    for ( let i = 0; i < coffees.length; i++ ) {
+      await Coffee.findByIdAndUpdate( 
+        coffees[i]._id, 
+        { $addToSet: { reviews: reviews[i]._id } } 
+      )
+    }
+
+    for (let i = 0; i < reviews.length; i++) {
+      await User.findByIdAndUpdate( 
+        randomElement( users )._id,
+        { $addToSet: { reviews: reviews[i]._id } }
+      )
+    }    
 
   } catch (err) {
     console.error(err);
