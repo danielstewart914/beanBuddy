@@ -111,6 +111,22 @@ const typeDefs = gql`
     flavorProfile: FullFlavorProfile
   }
 
+  input ReviewInput {
+    coffeeRating: Int!
+    grind: String
+    reviewText: String!
+    image: String
+    flavorProfile: FullFlavorProfile!
+  }
+
+  input CoffeeInput {
+    brand: String!
+    name: String!
+    roast: String!
+    beanType: String
+    origin: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -120,10 +136,18 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     me: User
+    allCoffee: [Coffee]
+    coffee(id: ID!): Coffee
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
+    deleteUser( id: ID! ): Boolean
+    addReview( review: ReviewInput! ): Review
+    updateReview( updatedReview: ReviewInput! ): Review
+    deleteReview( id: ID! ): Boolean
+    addCoffee( coffee: CoffeeInput! ): Coffee
+    deleteCoffee( id: ID! ): Boolean
     login(email: String!, password: String!): Auth
   }
 `;
