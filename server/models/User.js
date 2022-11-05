@@ -42,11 +42,6 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.pre( 'find', async function ( next ) {
-  await this.populate( 'reviews' );
-  next();
-} );
-
 userSchema.virtual( 'fullFlavorProfile' ).get( async function () {
   if ( this.reviews.length ) {
     // map array of flavorProfiles from reviews
