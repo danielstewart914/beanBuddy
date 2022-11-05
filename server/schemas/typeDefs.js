@@ -5,6 +5,7 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
+    flavorSettings: FullFlavorProfile
     fullFlavorProfile: FullFlavorProfile
     simpleFlavorProfile: SimpleFlavorProfile
     reviews: [Review]!

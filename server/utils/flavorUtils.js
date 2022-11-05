@@ -43,7 +43,8 @@ const reduceNestedObjects = ( object ) => {
       // get values of sub object
       const values = Object.values( object[key] );
       // and reduce to single mean value and store in result object
-      result[key] = intMean( values );
+      const filteredArray =  values.filter( num => num !== 0 );
+      result[key] = intMean( filteredArray );
       // otherwise pass value on to result object
     } else result[key] = object[key];
   } );
@@ -121,26 +122,10 @@ const blankFullProfile = {
   }
 };
 
-const blankSimpleProfile = {
-  roasted: 0,
-  spices: 0,
-  nutty: 0,
-  cocoa: 0,
-  sweet: 0,
-  floral: 0,
-  blackTea: 0,
-  fruity: 0,
-  sour: 0,
-  fermented: 0,
-  green: 0,
-  other: 0
-}
-
 module.exports = { 
   reduceArrayToMeanObject, 
   reduceNestedObjects, 
   propertiesToPositive, 
   blankFullProfile, 
-  blankSimpleProfile,
   intMean 
 };
