@@ -5,7 +5,88 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    password: String
+    fullFlavorProfile: FullFlavorProfile
+    simpleFlavorProfile: SimpleFlavorProfile
+    reviews: [Review]!
+  }
+
+  type SimpleFlavorProfile {
+    roasted: Int
+    spices: Int
+    nutty: Int
+    cocoa: Int
+    sweet: Int
+    floral: Int
+    blackTea: Int
+    fruity: Int
+    sour: Int
+    fermented: Int
+    green: Int
+    other: Int
+
+  }
+
+  type FullFlavorProfile {
+    roasted: Roasted
+    spices: Spices
+    nutty: Int
+    cocoa: Cocoa
+    sweet: Sweet
+    floral: Int
+    blackTea: Int
+    fruity: Fruity
+    sour: Int
+    fermented: Int
+    green: Green
+    other: Other
+  }
+
+  type Roasted {
+    cereal: Int
+    burnt: Int
+    tobacco: Int
+  }
+
+  type Spices {
+    nutmeg: Int
+    cinnamon: Int
+    clove: Int
+    pepper: Int
+    pungent: Int
+  }
+
+  type Cocoa {
+    chocolate: Int
+    darkChocolate: Int
+  }
+
+  type Sweet {
+    honey: Int
+    caramel: Int
+    mapleSyrup: Int
+    molasses: Int
+    vanilla: Int
+    overallSweet: Int
+    sweetAromatics: Int
+  }
+
+  type Fruity {
+    berry: Int
+    driedFruit: Int
+    citrusFruit: Int
+    otherFruit: Int
+  }
+
+  type Green {
+    oliveOil: Int
+    raw: Int
+    vegetative: Int
+    beany: Int
+  }
+
+  type Other {
+    paperyMusty: Int
+    chemical: Int
   }
 
   type Coffee {
@@ -15,19 +96,19 @@ const typeDefs = gql`
     roast: String
     beanType: String
     origin: String
-    flavorProfile: String //will be changed
+    fullFlavorProfile: FullFlavorProfile
+    simpleFlavorProfile: SimpleFlavorProfile
     rating: Int
     reviews: [Review]
   }
 
   type Review {
     _id: ID
-    coffee: Coffee
     coffeeRating: Int
+    grind: String
     reviewText: String
     image: String
-    flavorProfile: String //will be changed
-    user: User
+    flavorProfile: FullFlavorProfile
   }
 
   type Auth {
