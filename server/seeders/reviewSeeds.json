@@ -1,0 +1,332 @@
+[
+    {
+        "coffeeRating": 6,
+        "grind": "Coarse",
+        "brewMethod": "French Press",
+        "reviewText": "Good Coffee",
+        "image": "",
+        "flavorProfile": {
+          "roasted": {
+            "cereal": 0,
+            "burnt": 0,
+            "tobacco": -1
+          },
+          "spices": {
+            "nutmeg": 3,
+            "cinnamon": 4,
+            "clove": 0,
+            "pepper": 0,
+            "pungent": -1
+          },
+          "nutty": 0,
+          "cocoa": {
+            "chocolate": 3,
+            "darkChocolate": 0
+          },
+          "sweet": {
+            "honey": 0,
+            "caramel": 2,
+            "mapleSyrup": 0,
+            "molasses": 0,
+            "vanilla": 0,
+            "overallSweet": 0,
+            "sweetAromatics": 0
+          },
+          "floral": 0,
+          "blackTea": 0,
+          "fruity": {
+            "berry": 0,
+            "driedFruit": 0,
+            "citrusFruit": 0,
+            "otherFruit": 0
+          },
+          "sour": 0,
+          "fermented": 0,
+          "green": {
+            "oliveOil": 0,
+            "raw": 0,
+            "vegetative": 0,
+            "beany": 0
+          },
+          "other": {
+            "paperyMusty": 0,
+            "chemical": 0
+          }
+        }
+      },
+      {
+        "coffeeRating": 8,
+        "grind": "Fine",
+        "brewMethod": "Espresso",
+        "reviewText": "Great coffee!",
+        "image": "",
+        "flavorProfile": {
+          "roasted": {
+            "cereal": 0,
+            "burnt": 0,
+            "tobacco": -1
+          },
+          "spices": {
+            "nutmeg": 4,
+            "cinnamon": 3,
+            "clove": 0,
+            "pepper": 0,
+            "pungent": 0
+          },
+          "nutty": 2,
+          "cocoa": {
+            "chocolate": 5,
+            "darkChocolate": 0
+          },
+          "sweet": {
+            "honey": 0,
+            "caramel": 2,
+            "mapleSyrup": 0,
+            "molasses": 0,
+            "vanilla": 3,
+            "overallSweet": 0,
+            "sweetAromatics": 0
+          },
+          "floral": 0,
+          "blackTea": 0,
+          "fruity": {
+            "berry": 0,
+            "driedFruit": 0,
+            "citrusFruit": 0,
+            "otherFruit": 0
+          },
+          "sour": 0,
+          "fermented": 0,
+          "green": {
+            "oliveOil": 0,
+            "raw": 0,
+            "vegetative": 0,
+            "beany": 0
+          },
+          "other": {
+            "paperyMusty": 0,
+            "chemical": 0
+          }
+        }
+      },
+      {
+        "coffeeRating": 1,
+        "grind": "Medium",
+        "brewMethod": "Drip",
+        "reviewText": "Awful coffee",
+        "image": "",
+        "flavorProfile": {
+          "roasted": {
+            "cereal": 0,
+            "burnt": -5,
+            "tobacco": -1
+          },
+          "spices": {
+            "nutmeg": 0,
+            "cinnamon": 0,
+            "clove": 0,
+            "pepper": 0,
+            "pungent": -1
+          },
+          "nutty": 0,
+          "cocoa": {
+            "chocolate": 0,
+            "darkChocolate": 0
+          },
+          "sweet": {
+            "honey": 0,
+            "caramel": 2,
+            "mapleSyrup": 0,
+            "molasses": 1,
+            "vanilla": 0,
+            "overallSweet": 0,
+            "sweetAromatics": 0
+          },
+          "floral": 0,
+          "blackTea": 0,
+          "fruity": {
+            "berry": 0,
+            "driedFruit": 0,
+            "citrusFruit": 0,
+            "otherFruit": 0
+          },
+          "sour": 0,
+          "fermented": 0,
+          "green": {
+            "oliveOil": 0,
+            "raw": 0,
+            "vegetative": 0,
+            "beany": 0
+          },
+          "other": {
+            "paperyMusty": 0,
+            "chemical": -3
+          }
+        }
+      },
+      {
+        "coffeeRating": 5,
+        "grind": "Medium Coarse",
+        "brewMethod": "Pour Over",
+        "reviewText": "Not Bad Coffee",
+        "image": "",
+        "flavorProfile": {
+          "roasted": {
+            "cereal": 0,
+            "burnt": 0,
+            "tobacco": 0
+          },
+          "spices": {
+            "nutmeg": 0,
+            "cinnamon": 3,
+            "clove": 0,
+            "pepper": 0,
+            "pungent": 0
+          },
+          "nutty": 3,
+          "cocoa": {
+            "chocolate": 0,
+            "darkChocolate": 2
+          },
+          "sweet": {
+            "honey": 2,
+            "caramel": 0,
+            "mapleSyrup": 0,
+            "molasses": 0,
+            "vanilla": 0,
+            "overallSweet": 3,
+            "sweetAromatics": 0
+          },
+          "floral": 0,
+          "blackTea": 0,
+          "fruity": {
+            "berry": 0,
+            "driedFruit": 2,
+            "citrusFruit": 0,
+            "otherFruit": 0
+          },
+          "sour": 0,
+          "fermented": 0,
+          "green": {
+            "oliveOil": 0,
+            "raw": 0,
+            "vegetative": 0,
+            "beany": 0
+          },
+          "other": {
+            "paperyMusty": 0,
+            "chemical": 0
+          }
+        }
+      },
+      {
+        "coffeeRating": 3,
+        "grind": "Medium Fine",
+        "brewMethod": "Pour Over",
+        "reviewText": "Just Okay Coffee",
+        "image": "",
+        "flavorProfile": {
+          "roasted": {
+            "cereal": 0,
+            "burnt": -1,
+            "tobacco": 0
+          },
+          "spices": {
+            "nutmeg": 1,
+            "cinnamon": 1,
+            "clove": 0,
+            "pepper": 0,
+            "pungent": -1
+          },
+          "nutty": 3,
+          "cocoa": {
+            "chocolate": 0,
+            "darkChocolate": 0
+          },
+          "sweet": {
+            "honey": 0,
+            "caramel": 0,
+            "mapleSyrup": 3,
+            "molasses": 0,
+            "vanilla": 2,
+            "overallSweet": 0,
+            "sweetAromatics": 0
+          },
+          "floral": 0,
+          "blackTea": 0,
+          "fruity": {
+            "berry": 0,
+            "driedFruit": 0,
+            "citrusFruit": 1,
+            "otherFruit": 0
+          },
+          "sour": -2,
+          "fermented": 0,
+          "green": {
+            "oliveOil": 0,
+            "raw": 0,
+            "vegetative": 0,
+            "beany": 0
+          },
+          "other": {
+            "paperyMusty": 0,
+            "chemical": 0
+          }
+        }
+      },
+      {
+        "coffeeRating": 10,
+        "grind": "Extra Fine",
+        "brewMethod": "Turkish",
+        "reviewText": "Best Coffee Ever!",
+        "image": "",
+        "flavorProfile": {
+          "roasted": {
+            "cereal": 0,
+            "burnt": 0,
+            "tobacco": 0
+          },
+          "spices": {
+            "nutmeg": 3,
+            "cinnamon": 3,
+            "clove": 0,
+            "pepper": 0,
+            "pungent": 0
+          },
+          "nutty": 3,
+          "cocoa": {
+            "chocolate": 2,
+            "darkChocolate": 0
+          },
+          "sweet": {
+            "honey": 0,
+            "caramel": 2,
+            "mapleSyrup": 0,
+            "molasses": 0,
+            "vanilla": 4,
+            "overallSweet": 0,
+            "sweetAromatics": 0
+          },
+          "floral": 0,
+          "blackTea": 0,
+          "fruity": {
+            "berry": 0,
+            "driedFruit": 0,
+            "citrusFruit": 0,
+            "otherFruit": 0
+          },
+          "sour": 0,
+          "fermented": 0,
+          "green": {
+            "oliveOil": 0,
+            "raw": 0,
+            "vegetative": 0,
+            "beany": 0
+          },
+          "other": {
+            "paperyMusty": 0,
+            "chemical": 0
+          }
+        }
+      }
+]
