@@ -16,6 +16,12 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    allCoffee: async () => {
+      return Coffee.find().populate( 'reviews' );
+    },
+    coffee: async (parent, { id }) => {
+      return Coffee.findOne({ _id: id }).populate( 'reviews' );
+    },
   },
 
   Mutation: {
