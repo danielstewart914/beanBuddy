@@ -1,6 +1,9 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
+  # Output typedefs
+
   type User {
     _id: ID
     username: String
@@ -112,12 +115,19 @@ const typeDefs = gql`
     flavorProfile: FullFlavorProfile
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
+  # input typedefs
+
   input ReviewInput {
     coffeeRating: Int!
     grind: String
     reviewText: String!
     image: String
-    flavorProfile: FullFlavorProfile!
+    flavorProfile: FullFlavorProfileInput!
   }
 
   input CoffeeInput {
@@ -128,10 +138,70 @@ const typeDefs = gql`
     origin: String
   }
 
-  type Auth {
-    token: ID!
-    user: User
+  input FullFlavorProfileInput {
+    roasted: RoastedInput
+    spices: SpicesInput
+    nutty: Int
+    cocoa: CocoaInput
+    sweet: SweetInput
+    floral: Int
+    blackTea: Int
+    fruity: FruityInput
+    sour: Int
+    fermented: Int
+    green: GreenInput
+    other: OtherInput
   }
+
+  input RoastedInput {
+    cereal: Int
+    burnt: Int
+    tobacco: Int
+  }
+
+  input SpicesInput {
+    nutmeg: Int
+    cinnamon: Int
+    clove: Int
+    pepper: Int
+    pungent: Int
+  }
+
+  input CocoaInput {
+    chocolate: Int
+    darkChocolate: Int
+  }
+
+  input SweetInput {
+    honey: Int
+    caramel: Int
+    mapleSyrup: Int
+    molasses: Int
+    vanilla: Int
+    overallSweet: Int
+    sweetAromatics: Int
+  }
+
+  input FruityInput {
+    berry: Int
+    driedFruit: Int
+    citrusFruit: Int
+    otherFruit: Int
+  }
+
+  input GreenInput {
+    oliveOil: Int
+    raw: Int
+    vegetative: Int
+    beany: Int
+  }
+
+  input OtherInput {
+    paperyMusty: Int
+    chemical: Int
+  }
+
+  # Queries
 
   type Query {
     users: [User]
@@ -140,6 +210,8 @@ const typeDefs = gql`
     allCoffee: [Coffee]
     coffee(id: ID!): Coffee
   }
+
+  # Mutations
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
