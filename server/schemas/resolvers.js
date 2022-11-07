@@ -24,7 +24,7 @@ const resolvers = {
       return await Coffee.findOne( { _id: id } ).populate( 'reviews' );
     },
     findCoffee: async ( parent, { searchString } ) => {
-      const coffees = await Coffee.find({});
+      const coffees = await Coffee.find({}).populate( 'reviews' );
       return coffeeSearch( coffees, searchString );
     }
   },
