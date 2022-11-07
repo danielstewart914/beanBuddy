@@ -52,11 +52,6 @@ const coffeeSchema = new Schema(
   }
 );
 
-coffeeSchema.pre( 'find', async function ( next ) {
-  await this.populate( 'reviews' );
-  next();
-} );
-
 coffeeSchema.virtual( 'fullFlavorProfile' ).get( async function () {
   if ( this.reviews.length ) {
     // map array of flavorProfiles from reviews

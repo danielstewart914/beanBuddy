@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Coffee } = require('../models');
 const { signToken } = require('../utils/auth');
+const coffeeSearch = require('../utils/coffeeSearch');
 
 const resolvers = {
   Query: {
@@ -8,14 +9,24 @@ const resolvers = {
       return await User.find({}).populate( 'reviews' );
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate( 'reviews' );
+      return await User.findOne({ username }).populate( 'reviews' );
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate( 'reviews' );
+        return await User.findOne({ _id: context.user._id }).populate( 'reviews' );
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    allCoffee: async () => {
+      return await Coffee.find({}).populate( 'reviews' );
+    },
+    coffee: async ( parent, { id } ) => {
+      return await Coffee.findOne( { _id: id } ).populate( 'reviews' );
+    },
+    findCoffee: async ( parent, { searchString } ) => {
+      const coffees = await Coffee.find({});
+      return coffeeSearch( coffees, searchString );
+    }
   },
 
   Mutation: {
