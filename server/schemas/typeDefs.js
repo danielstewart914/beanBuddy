@@ -202,26 +202,36 @@ const typeDefs = gql`
   }
 
   # Queries
-
   type Query {
+    
+    #User queries
     users: [User]
     user(username: String!): User
     me: User
+
+    # Coffee queries
     allCoffee: [Coffee]
     coffee(id: ID!): Coffee
+    findCoffee( searchString: String! ): [Coffee]
   }
 
   # Mutations
-
   type Mutation {
+
+    # user mutations
     addUser(username: String!, email: String!, password: String!): Auth
+    updateUser( email: String, password: String, flavorSettings: FullFlavorProfileInput ): User
     deleteUser( id: ID! ): Boolean
+    login(email: String!, password: String!): Auth
+
+    # review mutations
     addReview( review: ReviewInput! ): Review
     updateReview( updatedReview: ReviewInput! ): Review
     deleteReview( id: ID! ): Boolean
+
+    # coffee mutations
     addCoffee( coffee: CoffeeInput! ): Coffee
     deleteCoffee( id: ID! ): Boolean
-    login(email: String!, password: String!): Auth
   }
 `;
 
