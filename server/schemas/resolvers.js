@@ -1,7 +1,9 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Coffee } = require('../models');
+const { User, Coffee, Review } = require('../models');
 const { signToken } = require('../utils/auth');
 const coffeeSearch = require('../utils/coffeeSearch');
+
+const { ObjectId } = require( 'mongoose' ).Types;
 
 const resolvers = {
   Query: {
@@ -20,8 +22,8 @@ const resolvers = {
     allCoffee: async () => {
       return await Coffee.find({}).populate( 'reviews' );
     },
-    coffee: async ( parent, { id } ) => {
-      return await Coffee.findOne( { _id: id } ).populate( 'reviews' );
+    coffee: async ( parent, { coffeeId } ) => {
+      return await Coffee.findOne( { _id: coffeeId } ).populate( 'reviews' );
     },
     findCoffee: async ( parent, { searchString } ) => {
       const coffees = await Coffee.find({}).populate( 'reviews' );
@@ -51,6 +53,70 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    updateUser: async ( parent, args, context ) => {
+      return await User.findByIdAndUpdate( context.user._id, args , { new: true } );
+    },
+    deleteUser: async ( parent, args, context ) => {
+
+      if ( !context.user ) throw new AuthenticationError('You need to be logged in!');
+
+      const deletedUser = await User.findByIdAndDelete( context.user._id );
+      if ( !deletedUser ) throw new Error( 'User does not exist!' );
+
+      const coffeeIds = ( await Review.find( { _id: { $in: deletedUser.reviews } } ) ).map( review => review.coffeeId );
+
+      await Review.deleteMany( { _id: { $in: deletedUser.reviews } } );
+      await Coffee.updateMany( 
+        { _id: coffeeIds },
+        { $pull: { reviews: { $in: coffeeIds } } }
+        );
+      return true;
+    },
+    addReview: async ( parent, { coffeeId, review }, context ) => {
+
+      if (!context.user) throw new AuthenticationError('You need to be logged in!');
+
+        const newReview = await Review.create( review );
+        const updatedCoffee = await Coffee.findOneAndUpdate( 
+          { _id: coffeeId },
+          { $addToSet: { reviews: newReview._id } },
+          { runValidators: true, new: true }
+        );
+        await User.findOneAndUpdate( 
+          { _id: context.user._id },
+          { $addToSet: { reviews: newReview._id } },
+          { runValidators: true, new: true }
+        );
+
+        return updatedCoffee;
+    },
+    updateReview: async ( parent, { reviewUpdate: { reviewId, coffeeRating, flavorProfile, additionalReviewText }  }, context ) => {
+      if ( !context.user ) throw new AuthenticationError('You need to be logged in!');
+
+      const loggedInUser = await User.findById( context.user._id );
+      if ( !loggedInUser.reviews.includes( reviewId ) ) throw new AuthenticationError('This review does not belong to you!');
+      
+      const updatedReview = await Review.findByIdAndUpdate( 
+        reviewId,
+        { coffeeRating: coffeeRating, flavorProfile: flavorProfile, $addToSet: { reviewText: '/n/nEdit:/n' + additionalReviewText } },
+        { new: true }
+      );
+      
+      return updatedReview;
+    },
+    deleteReview: async ( parent, { reviewId } ) => {
+      const review = await Review.findById( reviewId );
+      await Coffee.findByIdAndUpdate( 
+        review.coffeeId,
+        { $pull: { reviews: review._id } }
+      );
+      await User.findByIdAndUpdate( 
+        review.userId,
+        { $pull: { reviews: review._id } }
+      );
+    
+      return true;
     },
   },
 };
