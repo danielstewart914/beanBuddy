@@ -1,6 +1,9 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
+  # Output typedefs
+
   type User {
     _id: ID
     username: String
@@ -117,17 +120,118 @@ const typeDefs = gql`
     user: User
   }
 
+  # input typedefs
+
+  input ReviewInput {
+    coffeeRating: Int!
+    grind: String
+    reviewText: String!
+    image: String
+    flavorProfile: FullFlavorProfileInput!
+  }
+
+  input CoffeeInput {
+    brand: String!
+    name: String!
+    roast: String!
+    beanType: String
+    origin: String
+  }
+
+  input FullFlavorProfileInput {
+    roasted: RoastedInput
+    spices: SpicesInput
+    nutty: Int
+    cocoa: CocoaInput
+    sweet: SweetInput
+    floral: Int
+    blackTea: Int
+    fruity: FruityInput
+    sour: Int
+    fermented: Int
+    green: GreenInput
+    other: OtherInput
+  }
+
+  input RoastedInput {
+    cereal: Int
+    burnt: Int
+    tobacco: Int
+  }
+
+  input SpicesInput {
+    nutmeg: Int
+    cinnamon: Int
+    clove: Int
+    pepper: Int
+    pungent: Int
+  }
+
+  input CocoaInput {
+    chocolate: Int
+    darkChocolate: Int
+  }
+
+  input SweetInput {
+    honey: Int
+    caramel: Int
+    mapleSyrup: Int
+    molasses: Int
+    vanilla: Int
+    overallSweet: Int
+    sweetAromatics: Int
+  }
+
+  input FruityInput {
+    berry: Int
+    driedFruit: Int
+    citrusFruit: Int
+    otherFruit: Int
+  }
+
+  input GreenInput {
+    oliveOil: Int
+    raw: Int
+    vegetative: Int
+    beany: Int
+  }
+
+  input OtherInput {
+    paperyMusty: Int
+    chemical: Int
+  }
+
+  # Queries
   type Query {
+    
+    #User queries
     users: [User]
     user(username: String!): User
     me: User
+
+    # Coffee queries
     allCoffee: [Coffee]
     coffee(id: ID!): Coffee
+    findCoffee( searchString: String! ): [Coffee]
   }
 
+  # Mutations
   type Mutation {
+
+    # user mutations
     addUser(username: String!, email: String!, password: String!): Auth
+    updateUser( email: String, password: String, flavorSettings: FullFlavorProfileInput ): User
+    deleteUser( id: ID! ): Boolean
     login(email: String!, password: String!): Auth
+
+    # review mutations
+    addReview( review: ReviewInput! ): Review
+    updateReview( updatedReview: ReviewInput! ): Review
+    deleteReview( id: ID! ): Boolean
+
+    # coffee mutations
+    addCoffee( coffee: CoffeeInput! ): Coffee
+    deleteCoffee( id: ID! ): Boolean
   }
 `;
 
