@@ -238,7 +238,7 @@ const typeDefs = gql`
 
     # coffee mutations
     addCoffee( coffee: CoffeeInput! ): Coffee
-    deleteCoffee( id: ID! ): Boolean
+    deleteCoffee( coffeeId: ID! ): Boolean
   }
 `;
 

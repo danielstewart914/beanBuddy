@@ -40,15 +40,13 @@ const resolvers = {
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
-      if (!user) {
+      if (!user)
         throw new AuthenticationError('No user found with this email address');
-      }
 
       const correctPw = await user.isCorrectPassword(password);
 
-      if (!correctPw) {
+      if (!correctPw)
         throw new AuthenticationError('Incorrect credentials');
-      }
 
       const token = signToken(user);
 
@@ -59,23 +57,29 @@ const resolvers = {
     },
     deleteUser: async ( parent, args, context ) => {
 
-      if ( !context.user ) throw new AuthenticationError('You need to be logged in!');
+      if ( !context.user ) 
+        throw new AuthenticationError('You need to be logged in!');
 
       const deletedUser = await User.findByIdAndDelete( context.user._id );
-      if ( !deletedUser ) throw new Error( 'User does not exist!' );
+      if ( !deletedUser ) 
+        throw new Error( 'User does not exist!' );
 
-      const coffeeIds = ( await Review.find( { _id: { $in: deletedUser.reviews } } ) ).map( review => review.coffeeId );
+      const coffeeIds = ( 
+        await Review.find( { _id: { $in: deletedUser.reviews } } ) )
+        .map( review => review.coffeeId 
+      );
 
       await Review.deleteMany( { _id: { $in: deletedUser.reviews } } );
       await Coffee.updateMany( 
         { _id: coffeeIds },
-        { $pull: { reviews: { $in: coffeeIds } } }
+        { $pull: { reviews: { $in: deletedUser.reviews } } }
         );
       return true;
     },
     addReview: async ( parent, { coffeeId, review }, context ) => {
 
-      if (!context.user) throw new AuthenticationError('You need to be logged in!');
+      if (!context.user) 
+        throw new AuthenticationError('You need to be logged in!');
 
         const newReview = await Review.create( review );
         const updatedCoffee = await Coffee.findOneAndUpdate( 
@@ -91,15 +95,26 @@ const resolvers = {
 
         return updatedCoffee;
     },
-    updateReview: async ( parent, { reviewUpdate: { reviewId, coffeeRating, flavorProfile, additionalReviewText }  }, context ) => {
-      if ( !context.user ) throw new AuthenticationError('You need to be logged in!');
+    updateReview: async ( parent, { reviewUpdate }, context ) => {
+      if ( !context.user ) 
+        throw new AuthenticationError('You need to be logged in!');
 
       const loggedInUser = await User.findById( context.user._id );
-      if ( !loggedInUser.reviews.includes( reviewId ) ) throw new AuthenticationError('This review does not belong to you!');
+
+      const { reviewId, coffeeRating, flavorProfile, additionalReviewText } = reviewUpdate;
+      
+      if ( !loggedInUser.reviews.includes( reviewId ) ) 
+        throw new AuthenticationError('This review does not belong to you!');
       
       const updatedReview = await Review.findByIdAndUpdate( 
         reviewId,
-        { coffeeRating: coffeeRating, flavorProfile: flavorProfile, $addToSet: { reviewText: '/n/nEdit:/n' + additionalReviewText } },
+        { 
+          coffeeRating: coffeeRating, 
+          flavorProfile: flavorProfile, 
+          $addToSet: { 
+            reviewText:  additionalReviewText 
+          } 
+        },
         { new: true }
       );
       
@@ -118,6 +133,23 @@ const resolvers = {
     
       return true;
     },
+    addCoffee: async ( parent, { coffee } ) => {
+      return await Coffee.create( coffee );
+    },
+    deleteCoffee: async ( parent, { coffeeId } ) => {
+      const deletedCoffee = await Coffee.findByIdAndDelete( coffeeId );
+      const userIds = ( 
+        await Review.find( { _id: { $in: deletedCoffee.reviews } } ) )
+        .map( review => review.userId 
+      );
+
+      await Review.deleteMany( { _id: { $in: deletedCoffee.reviews } } );
+      await User.updateMany(
+        { _id: userIds },
+        { $pull: { reviews: { $in: deletedCoffee.reviews } } }
+      );
+      return true;
+    }
   },
 };
 
