@@ -12,11 +12,11 @@ const Coffee = () => {
         variables: {coffeeId: coffeeId},
     });
 
-    const coffee = data?.coffee || {};
-    
+
     if (loading) {
-        return <div>Loading... </div>;
-    } 
+        return <div>Loading...</div>;
+      }
+
     
     return (
         <div className='flex-row justify-center mb-3'>
