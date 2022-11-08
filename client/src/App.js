@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import SearchResults from './pages/SearchResults';
 import Profile from './pages/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -66,6 +67,10 @@ function App() {
               <Route 
                 path='/profiles/:username'
                 element={<Profile />}
+              />
+              <Route
+              path='/search-results:searchString'
+              element={<SearchResults/>}
               />
             </Routes>
           </div>
