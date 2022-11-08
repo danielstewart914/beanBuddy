@@ -19,3 +19,16 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const COFFEE_SEARCH = gql`
+  coffee search {
+    coffee {
+      _id
+      image
+      brand
+      name
+      origin
+      rating
+    }
+  }
+`;
