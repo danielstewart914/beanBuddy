@@ -12,6 +12,8 @@ const Coffee = () => {
         variables: {coffeeId: coffeeId},
     });
 
+    const coffee = data?.coffee || {};
+
 
     if (loading) {
         return <div>Loading...</div>;
