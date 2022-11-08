@@ -19,3 +19,17 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const COFFEE_SEARCH = gql`
+query SearchCoffee($searchString: String!) {
+  findCoffee(searchString: $searchString) {
+    _id
+    brand
+    name
+    beanType
+    origin
+    rating
+    #image
+  }
+}
+`;
