@@ -2,7 +2,7 @@ import React from 'react';
 import { COFFEE_SEARCH } from '../utils/queries';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-
+import SearchResult from '../components/SearchResult';
 
 const SearchResults = () => {
   const { searchString } = useParams();
@@ -22,7 +22,7 @@ const SearchResults = () => {
           </h2>
   
           <div className='col-12 col-md-10 mb-5'>
-            Search results here
+            <SearchResult />
           </div>
         </div>
       </div>
