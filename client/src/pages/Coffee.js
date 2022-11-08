@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {COFFEE_SEARCH} from '../utils';
+import {COFFEE_SEARCH} from '../utils/queries';
 import {useParams} from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
@@ -10,6 +10,10 @@ const Coffee = () => {
     const {loading} = useQuery(COFFEE_SEARCH, {
         variables: {coffeeId}
     });
+
+    if (loading) {
+        return <div>Loading...</div>;
+      }
     
     return (
         <div className='flex-row justify-center mb-3'>
