@@ -74,7 +74,7 @@ function App() {
               element ={<Coffee/>}
               />
               <Route
-              path='/search-results:searchString'
+              path='/search-results'
               element={<SearchResults/>}
               />
             </Routes>
