@@ -45,7 +45,13 @@ const Header = () => {
             )}
           </Col>
         </Row>
-        
+        <Row>
+          <Col className='text-end'>
+            <div>
+              <input type="text" placeholder='Search...'/>
+            </div>
+          </Col>
+        </Row>
       </Container>
     </header>
   );
