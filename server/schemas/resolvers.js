@@ -1,4 +1,8 @@
-const { AuthenticationError } = require('apollo-server-express');
+const { 
+  AuthenticationError, 
+  UserInputError 
+} = require('apollo-server-express');
+
 const { User, Coffee, Review } = require('../models');
 const { signToken } = require('../utils/auth');
 const coffeeSearch = require('../utils/coffeeSearch');
@@ -33,11 +37,18 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
+      if ( !username || !email || password )
+        throw new UserInputError( 'You must include username, email, and password' );
+
       const user = await User.create({ username, email, password });
       const token = signToken(user);
+
       return { token, user };
     },
     login: async (parent, { email, password }) => {
+      if ( !email || password )
+        throw new UserInputError( 'You must include email and password' );
+
       const user = await User.findOne({ email });
 
       if (!user)
@@ -73,27 +84,38 @@ const resolvers = {
       await Coffee.updateMany( 
         { _id: coffeeIds },
         { $pull: { reviews: { $in: deletedUser.reviews } } }
-        );
+      );
+
       return true;
     },
-    addReview: async ( parent, { coffeeId, review }, context ) => {
-
+    addReview: async ( parent, { coffeeId, newReview }, context ) => {
       if (!context.user) 
         throw new AuthenticationError('You need to be logged in!');
 
-        const newReview = await Review.create( review );
+        const review = await Review.create( 
+          { 
+            ...newReview, 
+            coffeeId: coffeeId, 
+            userId: context.user._id 
+          } 
+        );
         const updatedCoffee = await Coffee.findOneAndUpdate( 
           { _id: coffeeId },
-          { $addToSet: { reviews: newReview._id } },
-          { runValidators: true, new: true }
-        );
-        await User.findOneAndUpdate( 
-          { _id: context.user._id },
-          { $addToSet: { reviews: newReview._id } },
+          { $addToSet: { reviews: review._id } },
           { runValidators: true, new: true }
         );
 
-        return updatedCoffee;
+        if ( !updatedCoffee ) {
+          await Review.findByIdAndDelete( review._id );
+          throw new UserInputError( `Could not find Coffee with id: ${ coffeeId }` );
+        }
+        await User.findOneAndUpdate( 
+          { _id: context.user._id },
+          { $addToSet: { reviews: review._id } },
+          { runValidators: true, new: true }
+        );
+
+        return review;
     },
     updateReview: async ( parent, { reviewUpdate }, context ) => {
       if ( !context.user ) 
@@ -122,6 +144,10 @@ const resolvers = {
     },
     deleteReview: async ( parent, { reviewId } ) => {
       const review = await Review.findById( reviewId );
+
+      if ( !review )
+        throw new UserInputError( `Could not find review with Id: ${ reviewId }` );
+
       await Coffee.findByIdAndUpdate( 
         review.coffeeId,
         { $pull: { reviews: review._id } }
@@ -134,10 +160,19 @@ const resolvers = {
       return true;
     },
     addCoffee: async ( parent, { coffee } ) => {
+      const { brand, name, roast } = coffee;
+      
+      if ( !brand || !name || !roast )
+        throw new UserInputError( 'Must include brand, name, and roast!' );
+
       return await Coffee.create( coffee );
     },
     deleteCoffee: async ( parent, { coffeeId } ) => {
       const deletedCoffee = await Coffee.findByIdAndDelete( coffeeId );
+
+      if ( !deletedCoffee )
+        throw new UserInputError( `Could not find coffee with Id: ${ coffeeId }` );
+
       const userIds = ( 
         await Review.find( { _id: { $in: deletedCoffee.reviews } } ) )
         .map( review => review.userId 
@@ -148,6 +183,7 @@ const resolvers = {
         { _id: userIds },
         { $pull: { reviews: { $in: deletedCoffee.reviews } } }
       );
+
       return true;
     }
   },
