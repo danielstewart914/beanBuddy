@@ -37,7 +37,7 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
-      if ( !username || !email || password )
+      if ( !username || !email || !password )
         throw new UserInputError( 'You must include username, email, and password' );
 
       const user = await User.create({ username, email, password });
@@ -46,7 +46,7 @@ const resolvers = {
       return { token, user };
     },
     login: async (parent, { email, password }) => {
-      if ( !email || password )
+      if ( !email || !password )
         throw new UserInputError( 'You must include email and password' );
 
       const user = await User.findOne({ email });
