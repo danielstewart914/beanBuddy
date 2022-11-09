@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const { 
   reduceArrayToMeanObject, 
   reduceNestedObjects,
-  propertiesToPositive,
+  propertiesToAbs,
   blankFullProfile, 
   blankSimpleProfile, 
   intMean
@@ -54,10 +54,10 @@ const coffeeSchema = new Schema(
 
 coffeeSchema.virtual( 'fullFlavorProfile' ).get( async function () {
   if ( this.reviews.length ) {
-    // map array of flavorProfiles from reviews
-    const flavorProfiles = this.reviews.map( review => review.flavorProfile.toJSON() );
-    // return single object with mean positive value of each flavor
-    return propertiesToPositive( reduceArrayToMeanObject( flavorProfiles ) );
+    // map array of flavorProfiles from reviews with absolute values
+    const flavorProfiles = this.reviews.map( review => propertiesToAbs( review.flavorProfile.toJSON() ) );
+    // return single object with mean of each flavor
+    return reduceArrayToMeanObject( flavorProfiles  );
   } else {
     return blankFullProfile;
   }
@@ -65,10 +65,10 @@ coffeeSchema.virtual( 'fullFlavorProfile' ).get( async function () {
 
 coffeeSchema.virtual( 'simpleFlavorProfile' ).get( async function () {
   if ( this.reviews.length ) {
-    // map array of flavorProfiles from reviews
-    const flavorProfiles = this.reviews.map( review => review.flavorProfile.toJSON() );
-    // return a reduced object with subObjects consolidated into single positive values
-    return propertiesToPositive( reduceNestedObjects( reduceArrayToMeanObject( flavorProfiles ) ) );
+    // map array of flavorProfiles from reviews with absolute values
+    const flavorProfiles = this.reviews.map( review => propertiesToAbs( review.flavorProfile.toJSON() ) );
+    // return a reduced object with subObjects consolidated into single values as well
+    return reduceNestedObjects( reduceArrayToMeanObject( flavorProfiles ) );
   } else {
     return blankSimpleProfile;
   }
