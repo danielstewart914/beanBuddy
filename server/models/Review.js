@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Mongoose, Types } = require('mongoose');
 
 const flavorProfileSchema = require( './FlavorProfile' );
 
@@ -20,7 +20,7 @@ const reviewSchema = new Schema(
         trim: true,
     },
     reviewText: {
-        type: String,
+        type: [String],
         required: true,
         trim: true,
     },
@@ -30,6 +30,14 @@ const reviewSchema = new Schema(
         trim: true,
     },
     flavorProfile: flavorProfileSchema,
+    userId: {
+      type: Types.ObjectId,
+      ref: 'User'
+    },
+    coffeeId: {
+      type: Types.ObjectId,
+      ref: 'Coffee'
+    }
   },
   {
     toJSON: {

@@ -122,10 +122,26 @@ const blankFullProfile = {
   }
 };
 
+const blankSimpleProfile = {
+  roasted: 0,
+  spices: 0,
+  nutty: 0,
+  cocoa: 0,
+  sweet: 0,
+  floral: 0,
+  blackTea: 0,
+  fruity: 0,
+  sour: 0,
+  fermented: 0,
+  green: 0,
+  other: 0
+};
+
 module.exports = { 
   reduceArrayToMeanObject, 
   reduceNestedObjects, 
   propertiesToPositive, 
-  blankFullProfile, 
+  blankFullProfile,
+  blankSimpleProfile,
   intMean 
 };
