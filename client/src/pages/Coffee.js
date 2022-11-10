@@ -1,8 +1,8 @@
 import React from 'react';
-
 import { COFFEE } from '../utils/queries';
 import {useParams} from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import Review from '../components/Review';
 
 
 const Coffee = () => {
@@ -26,7 +26,6 @@ const Coffee = () => {
             <div>
                 <img alt='Selected Coffee'>Placeholder</img>
             </div>
-            <div>Rating: {coffee.rating}</div>
             <div>
                 <li>
                     <ul>{coffee.brand}</ul>
@@ -37,9 +36,10 @@ const Coffee = () => {
                 </li>
             </div>
             <div>
-                <div>{coffee.coffeeId}</div>
-                <div>{coffee.reviews}</div>
+                <Review />
             </div>
+
+            
             
 
 
