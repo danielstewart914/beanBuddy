@@ -110,7 +110,7 @@ const typeDefs = gql`
     _id: ID
     coffeeRating: Int
     grind: String
-    reviewText: String
+    reviewText: [String]
     image: String
     flavorProfile: FullFlavorProfile
   }
@@ -126,8 +126,14 @@ const typeDefs = gql`
     coffeeRating: Int!
     grind: String
     reviewText: String!
-    image: String
     flavorProfile: FullFlavorProfileInput!
+  }
+
+  input UpdatedReviewInput {
+    reviewId: ID!
+    coffeeRating: Int
+    additionalReviewText: String
+    flavorProfile: FullFlavorProfileInput
   }
 
   input CoffeeInput {
@@ -211,7 +217,7 @@ const typeDefs = gql`
 
     # Coffee queries
     allCoffee: [Coffee]
-    coffee(id: ID!): Coffee
+    coffee(coffeeId: ID!): Coffee
     findCoffee( searchString: String! ): [Coffee]
   }
 
@@ -220,18 +226,19 @@ const typeDefs = gql`
 
     # user mutations
     addUser(username: String!, email: String!, password: String!): Auth
-    updateUser( email: String, password: String, flavorSettings: FullFlavorProfileInput ): User
-    deleteUser( id: ID! ): Boolean
     login(email: String!, password: String!): Auth
+    updateUser( email: String, password: String, flavorSettings: FullFlavorProfileInput ): User
+    deleteUser: Boolean
 
     # review mutations
-    addReview( review: ReviewInput! ): Review
-    updateReview( updatedReview: ReviewInput! ): Review
-    deleteReview( id: ID! ): Boolean
+    addReview( coffeeId: ID! newReview: ReviewInput! ): Review
+    addReviewImage( reviewId: ID! ): Review
+    updateReview( reviewUpdate: UpdatedReviewInput! ): Review
+    deleteReview( reviewId: ID! ): Boolean
 
     # coffee mutations
     addCoffee( coffee: CoffeeInput! ): Coffee
-    deleteCoffee( id: ID! ): Boolean
+    deleteCoffee( coffeeId: ID! ): Boolean
   }
 `;
 

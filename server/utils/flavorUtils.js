@@ -51,24 +51,18 @@ const reduceNestedObjects = ( object ) => {
   return result;
 };
 
-// takes an object containing either sub-objects themselves containing numbers or simply numbers
-// and converts all negative numbers to positive numbers
-const propertiesToPositive = ( object ) => {
+// takes a complex object containing either numbers or sub-objects containing numbers
+// and returns a matching complex object with the absolute value of each property
+const propertiesToAbs = ( object ) => {
   const result = {};
   // get object keys and loop through them
   Object.keys( object ).forEach( key => {
-    // if property is an object recursively call propertiesToPositive
+    // if property is an object recursively call propertiesToAbs
     // passing current property
     if ( typeof object[key] === 'object' ) {
-      result[key] = propertiesToPositive( object[key] );
-      // if current property is negative
-    } else if ( object[key] < 0 ) {
-      // convert to positive and store in result object
-      result[key] = object[key] * -1;
-    } else {
-      // otherwise pass value on to result object
-      result[key] = object[key];
-    }
+      result[key] = propertiesToAbs( object[key] );
+      // result gets absolute value
+    } else result[key] = Math.abs( object[key] );
   } );
   return result;
 }
@@ -122,10 +116,26 @@ const blankFullProfile = {
   }
 };
 
+const blankSimpleProfile = {
+  roasted: 0,
+  spices: 0,
+  nutty: 0,
+  cocoa: 0,
+  sweet: 0,
+  floral: 0,
+  blackTea: 0,
+  fruity: 0,
+  sour: 0,
+  fermented: 0,
+  green: 0,
+  other: 0
+};
+
 module.exports = { 
   reduceArrayToMeanObject, 
   reduceNestedObjects, 
-  propertiesToPositive, 
-  blankFullProfile, 
+  propertiesToAbs, 
+  blankFullProfile,
+  blankSimpleProfile,
   intMean 
 };

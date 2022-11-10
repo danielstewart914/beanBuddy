@@ -112,6 +112,9 @@ const flavorProfileSchema = new Schema(
         type: Number
       }
     }
+  },
+  {
+    _id: false
   }
 );
 
