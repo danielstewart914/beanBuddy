@@ -1,0 +1,9 @@
+.Container {
+  flex-direction: column;
+  align-items: center;
+}
+
+.Heading {
+  font-size: 2rem;
+  font-weight: 550;
+}
