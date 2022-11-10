@@ -3,9 +3,13 @@
   --dark: #191715;
   --dark-brown: #4b240f;
   --light: #fff;
+  --tan: #BE966E;
+  --light-grey: #D9D6D1;
+  --grey: #6C6256;
   --base-margin: 0.75rem 0.5rem;
   --base-padding: 0.75rem;
   --base-box-shadow: 4px 4px 12px #000;
+  --base-border-radius: 0.5rem;
 }
 
 * {
@@ -22,6 +26,7 @@ body {
   min-height: 100%;
   line-height: 1;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--tan);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -58,4 +63,16 @@ ol, ul {
 
 .Link-Button:hover, .Link-Button:focus, .Button:hover, .Button:focus {
   background-color: var(--light-brown);
+}
+
+.Card {
+  border: 2px solid #000;
+  padding: var(--base-padding);
+  border-radius: var(--base-border-radius);
+  margin: var(--base-margin);
+  background-color: var(--light-grey);
+}
+
+.Page {
+  padding-bottom: 75px;
 }

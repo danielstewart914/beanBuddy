@@ -9,8 +9,9 @@ const Review = ({
 }) => {
     
     return (
-        <div>
+        <div className='Card'>
             <StarRating rating={coffeeRating} />
+            <div>{ reviewText[0] }</div>
         </div>
     )
 
