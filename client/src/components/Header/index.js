@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import SearchBar from '../SearchBar';
 
 const Header = () => {
   const logout = (event) => {
@@ -47,9 +48,7 @@ const Header = () => {
         </Row>
         <Row>
           <Col className='text-end'>
-            <div>
-              <input type="text" placeholder='Search...'/>
-            </div>
+            <SearchBar/>
           </Col>
         </Row>
       </Container>
