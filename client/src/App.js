@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import SearchResults from './pages/SearchResults';
 import Profile from './pages/Profile';
 import Coffee from './pages/Coffee';
+import AddReview from './pages/AddReview';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -76,6 +77,10 @@ function App() {
               <Route
               path='/search-results:searchString'
               element={<SearchResults/>}
+              />
+              <Route
+              path='/add-review'
+              element={<AddReview/>}
               />
             </Routes>
           </div>
