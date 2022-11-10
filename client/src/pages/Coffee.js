@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { COFFEE_SEARCH} from '../utils/queries';
+import { COFFEE } from '../utils/queries';
 import {useParams} from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/client';
 const Coffee = () => {
     const { coffeeId } = useParams();
 
-    const { loading, data } = useQuery(COFFEE_SEARCH, {
+    const { loading, data } = useQuery(COFFEE, {
         variables: {coffeeId: coffeeId},
     });
 
