@@ -43,7 +43,11 @@ query getCoffee($coffeeId: ID!){
     roast
     beanType
     origin
-    reviews
+    reviews{
+      coffeeRating
+      grind
+      reviewText
+    }
   }
 }
 `;
