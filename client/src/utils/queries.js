@@ -29,9 +29,21 @@ query SearchCoffee($searchString: String!) {
     beanType
     origin
     rating
-    roast
-    reviews
     #image
+  }
+}
+`;
+
+export const COFFEE = gql`
+query getCoffee($coffeeId: ID!){
+  coffee(coffeeId: $coffeeID) {
+    _id
+    brand
+    name
+    roast
+    beanType
+    origin
+    reviews
   }
 }
 `;
