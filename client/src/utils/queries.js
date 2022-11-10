@@ -36,7 +36,7 @@ query SearchCoffee($searchString: String!) {
 
 export const COFFEE = gql`
 query getCoffee($coffeeId: ID!){
-  coffee(coffeeId: $coffeeID) {
+  coffee(coffeeId: $coffeeId) {
     _id
     brand
     name
