@@ -33,3 +33,17 @@ query SearchCoffee($searchString: String!) {
   }
 }
 `;
+
+export const COFFEE = gql`
+query getCoffee($coffeeId: ID!){
+  coffee(coffeeId: $coffeeID) {
+    _id
+    brand
+    name
+    roast
+    beanType
+    origin
+    reviews
+  }
+}
+`;
