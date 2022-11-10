@@ -1,0 +1,21 @@
+
+.Heading {
+  font-size: 2rem;
+}
+
+.coffeeProperty {
+  font-weight: 700;
+}
+
+.coffeeContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.flavorProfile {
+  max-width: 500px;
+  max-height: 500px;
+  background-color: #999999;
+  margin: 2rem;
+}

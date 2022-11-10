@@ -1,0 +1,61 @@
+:root {
+  --light-brown: #83471A;
+  --dark: #191715;
+  --dark-brown: #4b240f;
+  --light: #fff;
+  --base-margin: 0.75rem 0.5rem;
+  --base-padding: 0.75rem;
+  --base-box-shadow: 4px 4px 12px #000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  line-height: 1;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+input, select, option, optgroup, textarea, button,
+pre, code {
+  font-size: 100%;
+  font-family: inherit;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.Link-Button, .Button {
+  margin: var(--base-margin);
+  text-decoration: none;
+  color: var(--light);
+  display: inline-block;
+  padding: var(--base-padding) calc( var(--base-padding) * 2 );
+  border: 2px solid var(--light);
+  background-color: var(--dark-brown);
+  box-shadow: var(--base-box-shadow);
+}
+
+.Link-Button:hover, .Link-Button:focus, .Button:hover, .Button:focus {
+  background-color: var(--light-brown);
+}
