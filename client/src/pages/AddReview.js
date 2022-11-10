@@ -19,7 +19,7 @@ const AddReview = () => {
     flavorProfile: "",
   });
   
-  const [addReview, { error }] = useMutation(ADD_REVIEW);
+  const [addReview] = useMutation(ADD_REVIEW);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
