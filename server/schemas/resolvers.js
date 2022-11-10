@@ -1,3 +1,6 @@
+require( 'dotenv' ).config();
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
 const { 
   AuthenticationError, 
   UserInputError 
@@ -6,8 +9,6 @@ const {
 const { User, Coffee, Review } = require('../models');
 const { signToken } = require('../utils/auth');
 const coffeeSearch = require('../utils/coffeeSearch');
-
-const { ObjectId } = require( 'mongoose' ).Types;
 
 const resolvers = {
   Query: {
@@ -116,6 +117,23 @@ const resolvers = {
         );
 
         return review;
+    },
+    addReviewImage: async ( parent, { reviewId } ) => {
+      const params = {
+        Bucket: 'bean-buddy',
+        Key: `${ date.now() }-${ reviewId }-image.webp`,
+        ContentType: "application/octet-stream"
+      };
+      
+      s3.getSignedUrl( 'putObject', params, function ( err, url ) {
+        const imageURL = url.split( '?' )[0];
+        const review = Review.findByIdAndUpdate( reviewId, { image: imageURL } );
+
+        if ( !review )
+          throw new UserInputError( `Could not find review with Id: ${ reviewId }` );
+
+        return url;
+      });
     },
     updateReview: async ( parent, { reviewUpdate }, context ) => {
       if ( !context.user ) 
