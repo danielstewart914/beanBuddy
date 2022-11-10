@@ -43,7 +43,9 @@ query getCoffee($coffeeId: ID!){
     roast
     beanType
     origin
-    reviews{
+    rating
+    reviews {
+      _id
       coffeeRating
       grind
       reviewText

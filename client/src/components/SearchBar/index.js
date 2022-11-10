@@ -1,17 +1,21 @@
 import React from 'react';
 
-const SearchBar = () => {
-    // const [searchString, setSearchString] = useState('');
+import styles from './SearchBar.module.css';
 
-    return (
-        <div>
-            <input 
-            type='text'
-            placeholder='Search'
-            // value={searchString}
-            />
-        </div>
-    )
+const SearchBar = () => {
+  // const [searchString, setSearchString] = useState('');
+
+  return (
+    <div>
+      <input 
+        className={ styles.SearchBar }
+        type='text'
+        placeholder='Search'
+        // value={searchString}
+      />
+      <button className='Button'>Search</button>
+    </div>
+  )
 }
 
 export default SearchBar;

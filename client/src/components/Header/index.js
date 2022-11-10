@@ -3,55 +3,54 @@ import { Link } from 'react-router-dom';
 
 import Auth from '../../utils/auth';
 
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import SearchBar from '../SearchBar';
+import NavBar from '../NavBar';
+
+import styles from './Header.module.css';
 
 const Header = () => {
+  
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
   };
+
   return (
-    <header className='bg-primary text-light mb-4 py-3 flex-row align-center'>
-      <Container>
-        <Row>
-          <Link className='text-light text-decoration-none' to='/'>
-            <h1 className='m-0 text-center'>BeanBuddy</h1>
+    <header className={ styles.Header }>
+        <div className={ styles.TopRow }>
+          <Link className={ styles.ProfileLink } to='/me'>
+            <img className={ styles.ProfileLogo } src={ process.env.PUBLIC_URL + '/images/person-circle.svg'} alt='' />
+            <div className={ styles.Profile }>Profile</div>
           </Link>
-          <p className='m-0 text-center'>An App for People who Love Coffee!</p>
-        </Row>
-        <Row>
-          <Col className='text-end'>
+          <div className={ styles.Login }>
             {Auth.loggedIn() ? (
               <>
                 <Link className='btn btn-lg btn-info m-2' to='/me'>
                   {Auth.getProfile().data.username}'s profile
                 </Link>
-                <Button className='btn btn-lg btn-light m-2' onClick={logout}>
+                <button className='Link-Button' onClick={logout}>
                   Logout
-                </Button>
+                </button>
               </>
             ) : (
               <>
-                <Link className='btn btn-lg btn-info m-2 rounded-0' to='/login'>
+                <Link className='Link-Button' to='/login'>
                   Login
                 </Link>
-                <Link className='btn btn-lg btn-light m-2 rounded-0' to='/signup'>
+                <Link className='Link-Button' to='/signup'>
                   Signup
                 </Link>
               </>
             )}
-          </Col>
-        </Row>
-        <Row>
-          <Col className='text-end'>
-            <SearchBar/>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+          <Link className={ styles.HomeLink } to='/'>
+            <h1 className={ styles.H1 }>
+              <img className={ styles.Logo } src={ process.env.PUBLIC_URL + '/images/BeanBuddy-Logo.svg'} alt='Bean Buddy Icon' />
+              BeanBuddy
+              </h1>
+            <p className={ styles.SubHeading }>An App for People who Love Coffee!</p>
+          </Link>
+        </div>
+        <NavBar />
     </header>
   );
 };
