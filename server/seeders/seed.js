@@ -23,14 +23,23 @@ db.once('open', async () => {
       await Coffee.findByIdAndUpdate( 
         coffees[i]._id, 
         { $addToSet: { reviews: reviews[i]._id } } 
-      )
+      );
+      await Review.findByIdAndUpdate( 
+        reviews[i]._id,
+        { coffeeId: coffees[i] }
+      );
     }
 
     for (let i = 0; i < reviews.length; i++) {
+      const userId = randomElement( users )._id;
       await User.findByIdAndUpdate( 
-        randomElement( users )._id,
+        userId,
         { $addToSet: { reviews: reviews[i]._id } }
-      )
+      );
+      await Review.findByIdAndUpdate( 
+        reviews[i]._id ,
+        { userId: userId }
+      );
     }    
 
   } catch (err) {

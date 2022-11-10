@@ -29,6 +29,8 @@ query SearchCoffee($searchString: String!) {
     beanType
     origin
     rating
+    roast
+    reviews
     #image
   }
 }
