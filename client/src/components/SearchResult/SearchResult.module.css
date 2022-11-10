@@ -1,0 +1,20 @@
+.Link {
+  text-decoration: none;
+  color: #000;
+  padding: var(--base-padding);
+}
+
+.Heading {
+  display: flex;
+  align-items: center;
+}
+
+.Title {
+  font-weight: 700;
+}
+
+.ImagePlaceholder {
+  width: 3rem;
+  display: inline;
+  margin-right: var(--base-margin);
+}
