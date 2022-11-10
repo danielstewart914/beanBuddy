@@ -7,13 +7,12 @@ import Review from '../components/Review';
 
 const Coffee = () => {
     const { coffeeId } = useParams();
-
+    console.log(coffeeId)
     const { loading, data } = useQuery(COFFEE, {
         variables: {coffeeId: coffeeId},
     });
 
     const coffee = data?.coffee || {};
-
 
     if (loading) {
         return <div>Loading...</div>;
@@ -24,7 +23,7 @@ const Coffee = () => {
         <div className='flex-row justify-center mb-3'>
             <h2 className='col-12 col-md-10 bg-dark text-light p-3 mb-5'> Coffee Name: {coffee.name} </h2>
             <div>
-                <img alt='Selected Coffee'>Placeholder</img>
+                
             </div>
             <div>
                 <li>
@@ -38,12 +37,6 @@ const Coffee = () => {
             <div>
                 <Review />
             </div>
-
-            
-            
-
-
-
         </div>
 
     )

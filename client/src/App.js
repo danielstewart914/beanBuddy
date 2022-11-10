@@ -72,7 +72,7 @@ function App() {
                 element={<Profile />}
               />
               <Route 
-              path = '/coffee'
+              path = '/coffee/:coffeeId'
               element ={<Coffee/>}
               />
               <Route

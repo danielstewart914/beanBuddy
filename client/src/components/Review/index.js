@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import StarRating from '../StarRating';
 
 
@@ -16,3 +15,5 @@ const Review = ({
     )
 
 }
+
+export default Review;
