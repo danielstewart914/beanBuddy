@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 // import { useMutation } from "@apollo/client";
 // import { ADD_REVIEW } from "../utils/mutations";
 
-const addReview = () => {
+const AddReview = () => {
   const [formState, setFormState] = useState({
     coffee: "",
     coffeeRating: "",
@@ -105,4 +105,4 @@ const addReview = () => {
   );
 };
 
-export default addReview;
+export default AddReview;
