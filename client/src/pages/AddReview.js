@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-// import { useMutation } from "@apollo/client";
-// import { ADD_REVIEW } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+import { ADD_REVIEW } from "../utils/mutations";
+
+import Auth from "../utils/auth";
 
 const AddReview = () => {
   const [formState, setFormState] = useState({
@@ -14,7 +16,10 @@ const AddReview = () => {
     brewMethod: "",
     reviewText: "",
     image: "",
+    flavorProfile: "",
   });
+  
+  const [addReview, { error }] = useMutation(ADD_REVIEW);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -28,6 +33,16 @@ const AddReview = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
+
+    try {
+      const { data } = await addReview({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.addReview.token);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -57,6 +72,11 @@ const AddReview = () => {
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
               </Form.Select>
             </Form.Group>
             <Form.Group>
@@ -90,6 +110,16 @@ const AddReview = () => {
               <Form.Label htmlFor="image">Image</Form.Label>
               <Form.Control
                 type="file"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label htmlFor="flavorProfile">Flavor Profile</Form.Label>
+              <Form.Control
+                type="text"
+                name="flavorProfile"
+                placeholder="Flavor Profile"
+                value={formState.flavorProfile}
+                onChange={handleChange}
               />
             </Form.Group>
             <Button
