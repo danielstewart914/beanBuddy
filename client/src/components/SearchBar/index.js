@@ -15,6 +15,7 @@ const SearchBar = () => {
   const handleSubmit = ( e ) => {
     e.preventDefault();
     navigate(`/search-results/${ searchString }`);
+    setSearchString('');
   }
 
   return (

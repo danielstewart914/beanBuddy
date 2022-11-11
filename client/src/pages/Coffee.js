@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Review from '../components/Review';
 import StarRating from '../components/StarRating';
+import FlavorProfileChart from '../components/FlavorProfileChart';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -21,7 +22,7 @@ const Coffee = () => {
     
     return ( loading ? <div>Loading...</div> : 
     <Container>
-        <Row>
+        <div>
             <div className='Card'>
                 <h2 className={ styles.Heading }>
                     <StarRating rating={coffee.rating} starSize={ 32 } />
@@ -34,16 +35,16 @@ const Coffee = () => {
                         <li><span className={ styles.CoffeeProperty }>Bean: </span>{coffee.beanType}</li>
                         <li><span className={ styles.CoffeeProperty }>Country of Origin: </span>{coffee.origin}</li>
                     </ul>
-                    <div className={ styles.FlavorProfile }>
-                        Flavor Profile Placeholder
-                    </div>
                 </div>
+                <Row className={ styles.Flavor }>
+                    <FlavorProfileChart fullCoffeeFlavorProfile={ coffee.fullFlavorProfile } simpleCoffeeFlavorProfile={ coffee.simpleFlavorProfile } />
+                </Row>
             </div>
             <div className={ styles.Reviews }>
                 <h3 className={ styles.ReviewsHeading }>Reviews:</h3>
                 { coffee.reviews.length ? coffee.reviews.map( review => <Review key={review._id} coffeeRating={review.coffeeRating} reviewText={ review.reviewText } />  ) : <div>No Reviews</div> }     
             </div>
-        </Row>
+        </div>
     </Container>
     )
 };
