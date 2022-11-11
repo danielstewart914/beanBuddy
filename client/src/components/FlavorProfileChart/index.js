@@ -122,6 +122,7 @@ const FlavorProfileChart = ( { fullCoffeeFlavorProfile, simpleCoffeeFlavorProfil
       'Burnt',
       'Tobacco',
       'Nutmeg',
+      'Cinnamon',
       'Clove',
       'Pepper',
       'Pungent',

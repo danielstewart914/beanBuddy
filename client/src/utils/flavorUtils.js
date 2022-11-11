@@ -21,6 +21,7 @@ export const getFullDataArray = ( fullProfile ) => {
     fullProfile.roasted.burnt,
     fullProfile.roasted.tobacco,
     fullProfile.spices.nutmeg,
+    fullProfile.spices.cinnamon,
     fullProfile.spices.clove,
     fullProfile.spices.pepper,
     fullProfile.spices.pungent,
