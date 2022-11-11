@@ -17,14 +17,11 @@ const SearchResults = () => {
 
   const results = data?.findCoffee || {};
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
   return (
     <Container className={ styles.Container }>
       <h2 className={ styles.Heading}>Results</h2>
       <Row>
-        { results.length ? results.map( result => <SearchResult key={ result._id } coffee={ result } /> ) : 'No Results' }
+        { loading ? 'Loading...' : results.length ? results.map( result => <SearchResult key={ result._id } coffee={ result } /> ) : 'No Results' }
       </Row>
     </Container>
   );
