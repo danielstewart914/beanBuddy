@@ -24,9 +24,6 @@ const Header = () => {
           <div className={ styles.Login }>
             {Auth.loggedIn() ? (
               <>
-                <Link className='btn btn-lg btn-info m-2' to='/me'>
-                  {Auth.getProfile().data.username}'s profile
-                </Link>
                 <button className='Link-Button' onClick={logout}>
                   Logout
                 </button>

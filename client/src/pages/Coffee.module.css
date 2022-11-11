@@ -22,15 +22,11 @@
   padding: 2rem;
 }
 
-.FlavorProfile {
-  display: inline-block;
-  padding: 1rem;
-  max-width: 500px;
-  max-height: 500px;
-  aspect-ratio: 1 / 1;
-  background-color: #999999;
-}
-
 .Properties {
   display: inline-block;
+}
+
+.Flavor {
+  display: flex;
+  justify-content: center;
 }
