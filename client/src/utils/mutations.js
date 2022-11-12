@@ -25,7 +25,7 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER_EMAIL = gql`
-  mutation updateEmail($email: String) {
+  mutation updateEmail($email: String!) {
   updateUser(email: $email) {
     _id
     email
@@ -34,7 +34,7 @@ export const UPDATE_USER_EMAIL = gql`
 `;
 
 export const UPDATE_USER_PASSWORD = gql`
-  mutation updatePassword($password: String) {
+  mutation updatePassword($password: String!) {
   updateUser(password: $password) {
     _id
   }
