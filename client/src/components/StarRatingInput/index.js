@@ -6,6 +6,9 @@ const styles = {
     width: '5.25em',
     color: 'black',
     fontSize: '2rem'
+  },
+  Container: {
+    padding: '10px'
   }
 }
 
@@ -16,7 +19,7 @@ const StarRatingInput = ( { rating, setRating } ) => {
   }
 
   return (
-    <div>
+    <div style={ styles.Container }>
       <StarRating rating={ rating } starSize={ 32 } />
       <div>
       <Slider
