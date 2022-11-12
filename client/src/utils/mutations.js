@@ -41,6 +41,12 @@ export const UPDATE_USER_PASSWORD = gql`
 }
 
 `
+export const DELETE_USER = gql`
+mutation deleteUser {
+  deleteUser
+}
+
+`;
 
 export const ADD_REVIEW = gql`
   mutation addReview($coffee: String!, $coffeeRating: Int!, $grind: String!, $brewMethod: String!, $reviewText: String!, $image: String!, $flavorProfile: String!) {
