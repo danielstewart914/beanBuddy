@@ -70,7 +70,7 @@ ol, ul {
   padding: var(--base-padding);
   border-radius: var(--base-border-radius);
   margin: var(--base-margin);
-  background-color: var(--light-grey);
+  background-color: var(--light);
 }
 
 .Page {
