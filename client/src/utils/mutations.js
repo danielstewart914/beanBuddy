@@ -24,18 +24,23 @@ export const ADD_USER = gql`
   }
 `;
 
-export const UPDATE_USER = gql`
-  mutation updateUser($username: String!, $password: String!) {
-    updateUser(username: $username, password: $password) {
-      token
-      user {
-        _id
-        username
-        password
-      }
-    }
+export const UPDATE_USER_EMAIL = gql`
+  mutation updateEmail($email: String) {
+  updateUser(email: $email) {
+    _id
+    email
   }
+}
 `;
+
+export const UPDATE_USER_PASSWORD = gql`
+  mutation updatePassword($password: String) {
+  updateUser(password: $password) {
+    _id
+  }
+}
+
+`
 
 export const ADD_REVIEW = gql`
   mutation addReview($coffee: String!, $coffeeRating: Int!, $grind: String!, $brewMethod: String!, $reviewText: String!, $image: String!, $flavorProfile: String!) {
