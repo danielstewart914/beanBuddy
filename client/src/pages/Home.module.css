@@ -1,16 +1,17 @@
 .Heading {
     font-size: 2rem;
+    font-weight: 550;
     text-align: center;
   }
 
 .Paragraph {
     font-size: 1rem;
-    text-align: center;
+    font-weight: 550;
+    margin: auto;
+    width: 75%;
 }
 
 .Contributors {
     text-align: center;
-    
-   
-    
+    font-weight: 550;   
 }
