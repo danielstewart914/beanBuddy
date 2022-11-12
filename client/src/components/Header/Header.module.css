@@ -1,0 +1,108 @@
+.H1 {
+  display: flex;
+  flex-direction: row;
+  font-weight: 700;
+  align-items: center;
+  color: #000;
+  margin: var(--base-margin);
+  padding: 2rem;
+  font-size: 2rem;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  border: 4px solid #000;
+  box-shadow: var(--base-box-shadow);
+}
+
+.Header {
+  display: flex;
+  flex-direction: column;
+  color: var( --light );
+  margin-bottom: 2rem;
+  background: url("./Coffee-Bean-Background.webp") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  align-items: center;
+}
+
+.SubHeading {
+  font-size: 1.25rem;
+  padding: var(--base-padding);
+  background-color: var(--dark);
+  border-radius: var(--base-border-radius);
+  box-shadow: var(--base-box-shadow);
+}
+
+.ProfileLink, .HomeLink, .Button {
+  text-decoration: none;
+  color: var( --light );
+}
+
+.ProfileLink {
+  display: flex;
+  align-items: center;
+  margin: var(--base-margin);
+  background-color: var(--dark);
+  border-radius: var(--base-border-radius);
+  box-shadow: var(--base-box-shadow);
+}
+
+.Profile {
+  display: inline-block;
+  padding-right: var(--base-padding);
+}
+
+.HomeLink {
+  margin: 0 auto;
+}
+
+.Button {
+  padding: 0.5em 1em;
+  background-color: var( --brown );
+  margin: 0 10px;
+  border: 2px solid var( --light );
+}
+
+.Nav {
+  text-align: end;
+  padding: 1rem;
+  color: bisque;
+}
+
+.Subheading {
+  text-align: center;
+}
+
+.Search {
+  width: 30px;
+  color: var( --light );
+}
+
+.Logo {
+  display: inline;
+  width: 4rem;
+  margin-right: 0.5rem;
+}
+
+.TopRow {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.ProfileLogo {
+  margin: var(--base-margin);
+  width: 3rem;
+  align-self: flex-start;
+  filter: invert(1);
+}
+
+@media screen and (min-width: 709px) {
+  .Login {
+    order: 1;
+  }
+}

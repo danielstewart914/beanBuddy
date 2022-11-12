@@ -1,0 +1,25 @@
+.FlavorProfileChart {
+  position: relative;
+  padding: 1rem;
+  background-color: #fff;
+  margin: auto 0;
+  width: 90vw;
+}
+
+@media screen and (min-width: 900px) {
+  .FlavorProfileChart {
+    width: 70vw;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .FlavorProfileChart {
+    width: 50vw;
+  }
+}
+
+@media screen and (min-width: 2100px) {
+  .FlavorProfileChart {
+    width: 40vw;
+  }
+}

@@ -1,0 +1,14 @@
+.NavBar {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 709px) {
+  .NavBar {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}

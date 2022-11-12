@@ -1,15 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
-      _id
-      username
-      email
-    }
-  }
-`;
-
 export const QUERY_ME = gql`
   query me {
     me {
@@ -35,15 +25,151 @@ query SearchCoffee($searchString: String!) {
 `;
 
 export const COFFEE = gql`
-query getCoffee($coffeeId: ID!){
-  coffee(coffeeId: $coffeeID) {
+query getCoffee($coffeeId: ID!) {
+  coffee(coffeeId: $coffeeId) {
     _id
-    brand
-    name
-    roast
     beanType
+    brand
+    fullFlavorProfile {
+      roasted {
+        cereal
+        burnt
+        tobacco
+      }
+      spices {
+        nutmeg
+        cinnamon
+        clove
+        pepper
+        pungent
+      }
+      nutty
+      cocoa {
+        chocolate
+        darkChocolate
+      }
+      sweet {
+        honey
+        caramel
+        mapleSyrup
+        molasses
+        vanilla
+        overallSweet
+        sweetAromatics
+      }
+      floral
+      blackTea
+      fruity {
+        berry
+        driedFruit
+        citrusFruit
+        otherFruit
+      }
+      sour
+      fermented
+      green {
+        oliveOil
+        raw
+        vegetative
+        beany
+      }
+      other {
+        paperyMusty
+        chemical
+      }
+    }
+    name
     origin
-    reviews
+    rating
+    reviews {
+      _id
+      coffeeRating
+      reviewText
+    }
+    roast
+    simpleFlavorProfile {
+      roasted
+      spices
+      nutty
+      cocoa
+      sweet
+      floral
+      blackTea
+      fruity
+      sour
+      fermented
+      green
+      other
+    }
+  }
+}
+`;
+
+export const QUERY_USER_FLAVOR_PROFILES = gql`
+  query UserFlavorProfiles {
+  me {
+    fullFlavorProfile {
+      roasted {
+        cereal
+        burnt
+        tobacco
+      }
+      spices {
+        nutmeg
+        cinnamon
+        clove
+        pepper
+        pungent
+      }
+      nutty
+      cocoa {
+        chocolate
+        darkChocolate
+      }
+      sweet {
+        honey
+        caramel
+        mapleSyrup
+        molasses
+        vanilla
+        overallSweet
+        sweetAromatics
+      }
+      floral
+      blackTea
+      fruity {
+        berry
+        driedFruit
+        citrusFruit
+        otherFruit
+      }
+      sour
+      fermented
+      green {
+        oliveOil
+        raw
+        vegetative
+        beany
+      }
+      other {
+        paperyMusty
+        chemical
+      }
+    }
+    simpleFlavorProfile {
+      roasted
+      spices
+      nutty
+      cocoa
+      sweet
+      floral
+      blackTea
+      fruity
+      sour
+      fermented
+      green
+      other
+    }
   }
 }
 `;

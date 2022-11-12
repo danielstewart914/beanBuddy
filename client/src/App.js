@@ -15,6 +15,7 @@ import SearchResults from './pages/SearchResults';
 import Profile from './pages/Profile';
 import Coffee from './pages/Coffee';
 import AddReview from './pages/AddReview';
+import About from './pages/About';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -47,9 +48,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className='flex-column justify-flex-start min-100-vh'>
+        <div>
           <Header />
-          <div className='container'>
+          <div className='Page' >
             <Routes>
               <Route 
                 path='/'
@@ -72,16 +73,20 @@ function App() {
                 element={<Profile />}
               />
               <Route 
-              path = '/coffee'
+              path = '/coffee/:coffeeId'
               element ={<Coffee/>}
               />
               <Route
-              path='/search-results:searchString'
+              path='/search-results/:searchString'
               element={<SearchResults/>}
               />
               <Route
               path='/add-review'
               element={<AddReview/>}
+              />
+              <Route
+              path='/about'
+              element={<About/>}
               />
             </Routes>
           </div>

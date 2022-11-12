@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../utils/mutations";
 
 import Auth from "../utils/auth";
+import StarRatingInput from "../components/StarRatingInput";
 
 const AddReview = () => {
   const [formState, setFormState] = useState({
@@ -19,7 +20,9 @@ const AddReview = () => {
     flavorProfile: "",
   });
   
-  const [addReview, { error }] = useMutation(ADD_REVIEW);
+ const [rating, setRating] = useState(1);
+
+  const [addReview] = useMutation(ADD_REVIEW);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -61,23 +64,7 @@ const AddReview = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="coffeeRating">Coffee Rating</Form.Label>
-              <Form.Select
-                name="coffeeRating"
-                value={formState.coffeeRating}
-                onChange={handleChange}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </Form.Select>
+              <StarRatingInput rating={rating} setRating={setRating}/>
             </Form.Group>
             <Form.Group>
               <Form.Label htmlFor="grind">Grind</Form.Label>

@@ -1,0 +1,32 @@
+
+.Heading {
+  font-size: 2rem;
+}
+
+.CoffeeProperty {
+  font-weight: 700;
+}
+
+.Reviews {
+  margin: var(--base-margin);
+}
+
+.ReviewsHeading {
+  font-size: 1.5rem;
+  font-weight: 550;
+}
+
+.CoffeeInfo {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+}
+
+.Properties {
+  display: inline-block;
+}
+
+.Flavor {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,78 @@
+:root {
+  --light-brown: #83471A;
+  --dark: #191715;
+  --dark-brown: #4b240f;
+  --light: #fff;
+  --tan: #BE966E;
+  --light-grey: #D9D6D1;
+  --grey: #6C6256;
+  --base-margin: 0.5rem;
+  --base-padding: 0.75rem;
+  --base-box-shadow: 4px 4px 12px #000;
+  --base-border-radius: 0.5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  line-height: 1;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--tan);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+input, select, option, optgroup, textarea, button,
+pre, code {
+  font-size: 100%;
+  font-family: inherit;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.Link-Button, .Button {
+  margin: var(--base-margin);
+  text-decoration: none;
+  color: var(--light);
+  display: inline-block;
+  padding: var(--base-padding) calc( var(--base-padding) * 2 );
+  border: 2px solid var(--light);
+  background-color: var(--dark-brown);
+  box-shadow: var(--base-box-shadow);
+}
+
+.Link-Button:hover, .Link-Button:focus, .Button:hover, .Button:focus {
+  background-color: var(--light-brown);
+}
+
+.Card {
+  border: 2px solid #000;
+  padding: var(--base-padding);
+  border-radius: var(--base-border-radius);
+  margin: var(--base-margin);
+  background-color: var(--light-grey);
+}
+
+.Page {
+  padding-bottom: 110px;
+}
