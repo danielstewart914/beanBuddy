@@ -1,5 +1,11 @@
-.SearchBar {
+.SearchInput {
   display: inline-block;
   padding: var(--base-padding);
   box-shadow: var(--base-box-shadow);
+}
+
+@media screen and (min-width: 610px) { 
+  .SearchBar {
+    margin-left: auto;
+  }
 }

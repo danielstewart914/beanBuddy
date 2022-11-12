@@ -10,6 +10,8 @@ import StarRatingInput from "../components/StarRatingInput";
 import FlavorInput from "../components/FlavorInput";
 import { formatFlavor } from "../utils/flavorUtils";
 
+import styles from './AddReview.module.css';
+
 const AddReview = () => {
   const [formState, setFormState] = useState({
     coffee: "",
@@ -159,12 +161,15 @@ const AddReview = () => {
   };
 
   return (
-    <main>
-      <div className="flex-row justify-center mb-4">
-        <div className="col-12 col-md-10 mb-3 p-3">
-          <Form onSubmit={handleFormSubmit}>
-            <Form.Group>
-              <Form.Label htmlFor="coffee">Coffee</Form.Label>
+    <main className={ styles.Main }>
+      <form 
+        onSubmit={handleFormSubmit}
+        className={ styles.Form }
+      >
+        <div className={ styles.Row }>
+          <div className={ styles.Col }>
+            <div className={ styles.FormGroup }>
+              <label className={ styles.Label } htmlFor="coffee">Coffee</label><br />
               <Form.Control
                 type="text"
                 name="coffee"
@@ -172,13 +177,15 @@ const AddReview = () => {
                 value={formState.coffee}
                 onChange={handleChange}
               />
-            </Form.Group>
-            <Form.Group>
+            </div>
+            <div className={ styles.FormGroup }>
+            <Form.Label className={ styles.Label } htmlFor="rating">Rating</Form.Label><br />
               <StarRatingInput rating={rating} setRating={setRating}/>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label htmlFor="grind">Grind</Form.Label>
+            </div>
+            <div className={ styles.FormGroup }>
+              <Form.Label className={ styles.Label } htmlFor="grind">Grind</Form.Label><br />
               <Form.Select
+                className={ styles.Input }
                 name="grind"
                 value={formState.grind}
                 onChange={handleChange}
@@ -188,10 +195,11 @@ const AddReview = () => {
                 <option value="Medium">Medium</option>
                 <option value="Course">Course</option>
               </Form.Select>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label htmlFor="brewMethod">Brew Method</Form.Label>
+            </div>
+            <div className={ styles.FormGroup }>
+              <Form.Label className={ styles.Label } htmlFor="brewMethod">Brew Method</Form.Label><br />
               <Form.Select
+                className={ styles.Input }
                 name="brewMethod"
                 value={formState.brewMethod}
                 onChange={handleChange}
@@ -203,37 +211,39 @@ const AddReview = () => {
                 <option value="Cold Brew">Cold Brew</option>
                 <option value="Pour Over">Pour Over</option>
               </Form.Select>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label htmlFor="reviewText">Review Text</Form.Label>
+            </div>
+            <div className={ styles.FormGroup }>
+              <Form.Label className={ styles.Label } htmlFor="reviewText">Review Text</Form.Label><br />
               <Form.Control
+                className={ styles.TextArea }
                 as={"textarea"}
-                rows={3}
                 value={formState.reviewText}
                 name='reviewText'
                 onChange={handleChange}
               />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label htmlFor="image">Image</Form.Label>
+            </div>
+            <div className={ styles.FormGroup }>
+              <Form.Label className={ styles.Label } htmlFor="image">Image</Form.Label><br />
               <Form.Control
                 type="file"
               />
-            </Form.Group>
-            <Button
-              className='Button'
-              type="submit"
-            >
-              Submit
-            </Button>
-          </Form>
+            </div>
+          </div>
           <FlavorInput 
             flavorProfile={flavorProfile} 
             handleChangeFlavorChange={handleChangeFlavorChange} 
             handleDislikeChange={handleDislikeChange}
           />
         </div>
-      </div>
+        <div className={ styles.Footer }>
+          <button
+            className='Button'
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
     </main>
   );
 };
