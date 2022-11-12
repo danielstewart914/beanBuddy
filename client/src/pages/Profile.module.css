@@ -6,3 +6,8 @@
   font-size: 2rem;
   text-align: center;
 }
+.Modal {
+  text-align: center;
+  background-color: white;
+  width: 50;
+}
