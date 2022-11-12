@@ -3,6 +3,8 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/Row';
 
 import styles from './Profile.module.css';
 
@@ -29,11 +31,21 @@ const Profile = () => {
   }
 
   return (
-    <div>
+    <Container className={styles.Container}>
       <h2 className={ styles.Header }>
         Welcome Back {`${user.username}`}!.
       </h2>
-    </div>
+      <br/>
+      <br/>
+        <h4>
+          What would you like to do?
+        </h4>
+        <br/>
+        <br/>
+      <Row>
+        
+      </Row>
+      </Container>
   );
 };
 
