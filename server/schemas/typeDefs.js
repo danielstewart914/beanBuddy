@@ -125,6 +125,7 @@ const typeDefs = gql`
   input ReviewInput {
     coffeeRating: Int!
     grind: String
+    brewMethod: String
     reviewText: String!
     flavorProfile: FullFlavorProfileInput!
   }

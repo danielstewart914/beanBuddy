@@ -55,3 +55,7 @@ export const getFullDataArray = ( fullProfile ) => {
 export const negativeToNegativeOne = ( array ) => {
   return array.map( number => number < -1 ? 0 : number );
 }
+
+export const formatFlavor = ( flavor ) => {
+  return flavor.dislike ? ( flavor.value * -1 ) : flavor.value
+}
