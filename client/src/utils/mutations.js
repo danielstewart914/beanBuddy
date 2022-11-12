@@ -24,6 +24,19 @@ export const ADD_USER = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+  mutation updateUser($username: String!, $password: String!) {
+    updateUser(username: $username, password: $password) {
+      token
+      user {
+        _id
+        username
+        password
+      }
+    }
+  }
+`;
+
 export const ADD_REVIEW = gql`
   mutation addReview($coffee: String!, $coffeeRating: Int!, $grind: String!, $brewMethod: String!, $reviewText: String!, $image: String!, $flavorProfile: String!) {
     addReview(coffee: $coffee, coffeeRating: $coffeeRating, grind: $grind, brewMethod: $brewMethod, reviewText: $reviewText, image: $image, flavorProfile: $flavorProfile) {
