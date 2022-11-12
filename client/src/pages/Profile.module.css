@@ -1,3 +1,7 @@
+.Container {
+  flex-direction: column;
+  align-items: center;
+}
 .Header {
   font-size: 2rem;
   text-align: center;

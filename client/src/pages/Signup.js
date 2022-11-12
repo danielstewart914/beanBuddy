@@ -13,6 +13,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import styles from './Signup.module.css';
+
 const Signup = () => {
   const [formState, setFormState] = useState({
     username: '',
@@ -62,7 +64,7 @@ const Signup = () => {
                   <Row xs={1} md={2} lg={3}>
                     <Col>
                       <Form.Control
-                        className='m-1 rounded-0'
+                        className={ styles.Signup }
                         placeholder='Your username'
                         name='username'
                         type='text'
@@ -72,7 +74,7 @@ const Signup = () => {
                     </Col>
                     <Col>
                       <Form.Control
-                        className='m-1 rounded-0'
+                        className={ styles.Signup }
                         placeholder='Your email'
                         name='email'
                         type='email'
@@ -82,7 +84,7 @@ const Signup = () => {
                     </Col>
                     <Col>            
                       <Form.Control
-                        className='m-1 rounded-0'
+                        className={ styles.Signup }
                         placeholder='password'
                         name='password'
                         type='password'
@@ -94,7 +96,7 @@ const Signup = () => {
                   <Row>
                   <Col className='text-end'>
                     <Button
-                      className='btn btn-block btn-primary m-1 px-3 rounded-0'
+                      className='Button'
                       type='submit'
                     >
                       Submit
