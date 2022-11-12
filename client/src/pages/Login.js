@@ -11,6 +11,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import styles from './Login.module.css';
+
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
@@ -63,7 +65,7 @@ const Login = (props) => {
                 <Row xs={1} md={2}>
                   <Col>
                     <Form.Control
-                      className='m-1 rounded-0'
+                      className={ styles.Login }
                       placeholder='Your email'
                       name='email'
                       type='email'
@@ -73,7 +75,7 @@ const Login = (props) => {
                   </Col>
                   <Col>
                     <Form.Control
-                      className='m-1 rounded-0'
+                      className={ styles.Login }
                       placeholder='password'
                       name='password'
                       type='password'
@@ -86,7 +88,7 @@ const Login = (props) => {
                 <Row>
                   <Col className='text-end'>
                     <Button
-                      className='btn btn-block btn-primary m-1 px-3 rounded-0'
+                      className='Button'
                       type='submit'
                     >
                       Submit
