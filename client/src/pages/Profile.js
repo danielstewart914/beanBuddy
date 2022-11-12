@@ -68,8 +68,8 @@ const Profile = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="primary" onClick={handleDeleteModalClose}>Do Not Delete</Button>
-          <Button variant="secondary" onClick = {handleDeleteUser} >Delete Profile</Button>
+          <Button variant="primary" onClick={handleDeleteModalClose} className={styles.Button}>Do Not Delete</Button>
+          <Button variant="secondary" onClick = {handleDeleteUser} className={styles.Button}>Delete Profile</Button>
         </Modal.Footer>
       </Modal>
       :
@@ -131,7 +131,7 @@ const Profile = () => {
       </h2>
       <br/>
       <br/>
-        <h4>
+        <h4 className={styles.Prompt}>
           What would you like to do?
         </h4>
         <br/>

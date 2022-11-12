@@ -5,5 +5,7 @@
 }
 .Paragraph {
     font-size: 1rem;
-    text-align: center;
+    font-weight: 550;
+    width: 75%;
+    margin: auto;
 }
