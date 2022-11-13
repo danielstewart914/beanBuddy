@@ -50,7 +50,7 @@ ol, ul {
   justify-content: center;
 }
 
-.Link-Button, .Button {
+.Link-Button, .Button, .CancelButton {
   margin: var(--base-margin);
   text-decoration: none;
   color: var(--light);
@@ -59,6 +59,10 @@ ol, ul {
   border: 2px solid var(--light);
   background-color: var(--dark-brown);
   box-shadow: var(--base-box-shadow);
+}
+
+.CancelButton {
+  background-color: #871512;
 }
 
 .Link-Button:hover, .Link-Button:focus, .Button:hover, .Button:focus {
