@@ -21,3 +21,13 @@
     width: 90%;
     padding: var(--base-padding);
 }
+
+.Link {
+    color: var(--dark-grey);
+    display: inline-block;
+    margin: 3px;
+}
+
+.Link:hover, Link:focus {
+    color: var(--light-brown);
+}

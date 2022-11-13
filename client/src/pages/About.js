@@ -3,7 +3,7 @@ import styles from './About.module.css'
 
 const About = () => {
     return(
-        <main>
+        <main className={ styles.Main }>
             <h2 className={styles.Heading}>About BeanBuddy</h2>
             <br/>
             <p className={styles.Paragraph}>The BeanBuddy application is built around the development of the user's FlavorProfile. In order to build this profile, we needed to find some quantifiable way of measuring the coffee tastes of the user. Luckily a great deal of work has already been done on this topic by the Coffee World Research (WCR) Organization.</p>

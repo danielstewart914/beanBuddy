@@ -10,10 +10,10 @@ const Home = () => {
       <br/>
       <br/>
     <p className= {styles.Contributors}>Designed and developed by:<br/> 
-    <a href="https://github.com/danielstewart914">Daniel Stewart</a><br/> 
-    <a href="https://github.com/ZacharyWarnes">Zachary Warnes</a><br/>
-    <a href="https://github.com/azm89">Ashton Moore</a><br/>
-    <a href="https://github.com/NiklasSolomon">Niklas Solomon</a></p>
+    <a className={ styles.Link } href="https://github.com/danielstewart914">Daniel Stewart</a><br/> 
+    <a className={ styles.Link } href="https://github.com/ZacharyWarnes">Zachary Warnes</a><br/>
+    <a className={ styles.Link } href="https://github.com/azm89">Ashton Moore</a><br/>
+    <a className={ styles.Link } href="https://github.com/NiklasSolomon">Niklas Solomon</a></p>
 
     
     </main>
