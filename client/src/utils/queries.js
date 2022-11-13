@@ -30,6 +30,7 @@ query getCoffee($coffeeId: ID!) {
     _id
     beanType
     brand
+    image
     fullFlavorProfile {
       roasted {
         cereal
@@ -85,6 +86,8 @@ query getCoffee($coffeeId: ID!) {
       _id
       coffeeRating
       reviewText
+      grind
+      brewMethod
     }
     roast
     simpleFlavorProfile {

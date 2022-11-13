@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_REVIEW } from "../utils/mutations";
+import { ADD_REVIEW, ADD_REVIEW_IMAGE } from "../utils/mutations";
 
 import StarRatingInput from "../components/StarRatingInput";
 import FlavorInput from "../components/FlavorInput";
@@ -10,20 +10,21 @@ import styles from './AddReview.module.css';
 import { ALL_COFFEE } from "../utils/queries";
 
 import Auth from '../utils/auth';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const AddReview = () => {
 
-  const { loading, data } = useQuery( ALL_COFFEE );
+  const navigate = useNavigate();
 
+  const { loading, data } = useQuery( ALL_COFFEE );
+  const [addReviewImage] = useMutation( ADD_REVIEW_IMAGE );
   const [addReview] = useMutation(ADD_REVIEW);
 
   const [formState, setFormState] = useState({
     coffeeId: "",
     grind: "",
     brewMethod: "",
-    reviewText: "",
-    image: "",
+    reviewText: ""
   });
   
   const [rating, setRating] = useState(1);
@@ -64,6 +65,8 @@ const AddReview = () => {
     }
   );
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
   if (!Auth.loggedIn()) {
     return <Navigate to='/login' />;
   };
@@ -72,8 +75,6 @@ const AddReview = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
-    console.log( name, value )
 
     setFormState({
       ...formState,
@@ -165,12 +166,33 @@ const AddReview = () => {
         }
       }
 
-      console.log( newReview )
-
-      const { data } = await addReview({
+      const { data: reviewData } = await addReview({
         variables: { ...newReview },
       });
-      console.log( data );
+
+      const review = reviewData?.addReview || {};
+
+      if ( selectedFile ) {
+        const ext = selectedFile.type.split('/')[1];
+        const { data: urlData } = await addReviewImage({
+          variables: {
+            reviewId: review._id,
+            ext
+          }
+        });
+
+        await fetch( urlData.addReviewImage,
+          {
+            method: 'PUT',
+            body: selectedFile,
+            headers: { 'Content-Type': 'application/octet-stream' }
+          }
+        );
+
+        navigate( `/coffee/${ newReview.coffeeId }` )
+
+      }
+
     } catch (e) {
       console.error(e);
     }
@@ -255,8 +277,10 @@ const AddReview = () => {
             </div>
             <div className={ styles.FormGroup }>
               <label className={ styles.Label } htmlFor="image">Image</label><br />
-              <input
-                type="file"
+              <input 
+                type="file" 
+                accept="image/*" 
+                onChange={ e => setSelectedFile( e.target.files[0] ) }
               />
             </div>
           </div>

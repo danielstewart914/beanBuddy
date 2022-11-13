@@ -16,7 +16,7 @@ import {
 import { Radar } from 'react-chartjs-2';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER_FLAVOR_PROFILES } from '../../utils/queries';
-import auth from '../../utils/auth';
+import Auth from '../../utils/auth';
 import { useState } from 'react';
 
 ChartJS.register(
@@ -182,7 +182,7 @@ const FlavorProfileChart = ( { fullCoffeeFlavorProfile, simpleCoffeeFlavorProfil
     ],
   }
 
-  if ( auth.loggedIn() && !loading ) {
+  if ( Auth.loggedIn() && !loading ) {
     simpleData.datasets.push( 
       {
         data: negativeToNegativeOne( getSimpleDataArray( user.simpleFlavorProfile ) ),

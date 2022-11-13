@@ -59,3 +59,9 @@ export const ADD_REVIEW = gql`
   }
 }
 `;
+
+export const ADD_REVIEW_IMAGE = gql`
+  mutation AddreviewImage($reviewId: ID!, $ext: String!) {
+  addReviewImage(reviewId: $reviewId, ext: $ext)
+}
+`;

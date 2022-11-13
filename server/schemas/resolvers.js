@@ -125,22 +125,25 @@ const resolvers = {
 
         return review;
     },
-    addReviewImage: async ( parent, { reviewId } ) => {
+    addReviewImage: async ( parent, { reviewId, ext } ) => {
+      const review = await Review.findById( reviewId );
+
+      if ( !review )
+        throw new UserInputError( `Could not find review with Id: ${ reviewId }` );
+
       const params = {
         Bucket: 'bean-buddy',
-        Key: `${ date.now() }-${ reviewId }-image.webp`,
+        Key: `${ Date.now() }-${ reviewId }-image.${ ext }`,
         ContentType: "application/octet-stream"
       };
-      
-      s3.getSignedUrl( 'putObject', params, function ( err, url ) {
-        const imageURL = url.split( '?' )[0];
-        const review = Review.findByIdAndUpdate( reviewId, { image: imageURL } );
 
-        if ( !review )
-          throw new UserInputError( `Could not find review with Id: ${ reviewId }` );
+      const url =  await s3.getSignedUrlPromise( 'putObject', params );
+      const imageURL = url.split( '?' )[0];
 
-        return url;
-      });
+      review.image = imageURL;
+      review.save();
+
+      return url;
     },
     updateReview: async ( parent, { reviewUpdate }, context ) => {
       if ( !context.user ) 
