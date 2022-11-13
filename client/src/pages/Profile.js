@@ -4,7 +4,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { DELETE_USER, UPDATE_USER_EMAIL, UPDATE_USER_PASSWORD } from '../utils/mutations';
 import Auth from '../utils/auth';
-import Container from 'react-bootstrap/esm/Container';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal'
 
