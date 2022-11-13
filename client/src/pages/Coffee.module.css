@@ -18,7 +18,9 @@
 
 .CoffeeInfo {
   display: flex;
-  padding: 2rem;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .Properties {
@@ -31,11 +33,12 @@
 }
 
 .Square {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 35%;
-  max-width: 500px;
+  width: 100%;
+  max-width: 175px;
   aspect-ratio: 1/1;
   overflow: hidden;
 }
@@ -45,4 +48,27 @@
   min-width: 100%;
   min-height: 100%;
   min-height: -webkit-fill-available;
+}
+
+@media screen and (min-width: 600px) {
+  .CoffeeInfo {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .Square {
+    max-width: 250px;
+  }
+}
+
+
+@media screen and (min-width: 900px) {
+  .Square {
+    max-width: 300px;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .Square {
+    max-width: 400px;
+  }
 }
