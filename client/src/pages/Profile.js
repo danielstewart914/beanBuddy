@@ -126,6 +126,10 @@ const Profile = () => {
    )
   };
 
+  const bullets = () => {
+    return [...Array(12)].map( ( e, i ) => <span key={ i }>&bull;</span> )
+  };
+
   return (
     <Container className={styles.Container}>
       <h2 className={ styles.Header }>
@@ -152,11 +156,13 @@ const Profile = () => {
             )
           :
             (
-              <>{user.email} <Button
-              className='Button' onClick={toggleEditEmail}
+              <>
+              <span className={ styles.Label }>{user.email}</span>
+              <button
+                className='Button' onClick={toggleEditEmail}
               >
                 Update Email
-                </Button> 
+              </button> 
             </>
             )
         }
@@ -175,11 +181,13 @@ const Profile = () => {
             )
           :
             (
-              <> ******** <Button
-              className='Button' onClick={toggleEditPassword}
+              <> 
+              <span className={ styles.Label }>{ bullets() }</span> 
+              <button
+                className='Button' onClick={toggleEditPassword}
               >
                 Update Password
-                </Button> 
+              </button> 
             </>
             )
         }

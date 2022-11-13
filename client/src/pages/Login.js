@@ -11,7 +11,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import styles from './Login.module.css';
+import styles from './Signup-Login.module.css';
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -50,10 +50,10 @@ const Login = (props) => {
 
   return (
   <Container as='main'>
-    <Row className='justify-content-center mb-4'>
+    <Row>
       <Col xs={12} lg={10}>
         <Card className='card rounded-0'>
-          <Card.Title className='card-header bg-dark text-light p-2 rounded-0'>Login</Card.Title>
+          <Card.Title className={ styles.Title }>Login</Card.Title>
           <Card.Body>
             {data ? (
               <p>
@@ -65,7 +65,7 @@ const Login = (props) => {
                 <Row xs={1} md={2}>
                   <Col>
                     <Form.Control
-                      className={ styles.Login }
+                      className={ styles.Input }
                       placeholder='Your email'
                       name='email'
                       type='email'
@@ -75,7 +75,7 @@ const Login = (props) => {
                   </Col>
                   <Col>
                     <Form.Control
-                      className={ styles.Login }
+                      className={ styles.Input }
                       placeholder='password'
                       name='password'
                       type='password'
