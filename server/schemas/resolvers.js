@@ -63,8 +63,15 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async ( parent, args, context ) => {
-      return await User.findByIdAndUpdate( context.user._id, args , { new: true } );
+    updateUser: async ( parent, { email, password, flavorSettings }, context ) => {
+      const user = await User.findById( context.user._id );
+      if ( email ) user.email = email;
+      if ( password ) user.password = password;
+      if ( flavorSettings ) user.flavorSettings = flavorSettings;
+
+      await user.save();
+
+      return User.findById( context.user._id );
     },
     deleteUser: async ( parent, args, context ) => {
 

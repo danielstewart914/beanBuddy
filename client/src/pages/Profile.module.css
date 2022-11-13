@@ -35,3 +35,8 @@
 .Link-Button:hover, .Link-Button:focus, .Button:hover, .Button:focus {
   background-color: var(--light-brown);
 }
+
+.Label {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
