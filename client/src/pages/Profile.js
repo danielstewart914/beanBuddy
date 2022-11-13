@@ -131,7 +131,7 @@ const Profile = () => {
   };
 
   return (
-    <Container className={styles.Container}>
+    <main className={styles.Main}>
       <h2 className={ styles.Header }>
         Welcome Back {`${user.username}`}!.
       </h2>
@@ -195,7 +195,7 @@ const Profile = () => {
       <Col>
         <DeleteModal />
       </Col>
-    </Container>
+    </main>
   );
 };
 

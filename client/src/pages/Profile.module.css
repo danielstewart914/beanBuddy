@@ -1,6 +1,10 @@
-.Container {
+.Main {
+  display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #D9D6D1cc;
+  width: 90%;
+  padding: var(--base-padding);
 }
 .Header {
   font-size: 2rem;

@@ -14,6 +14,9 @@
 .Main {
   display: flex;
   flex-direction: column;
+  background-color: #D9D6D1cc;
+  width: 90%;
+  padding: var(--base-padding);
 }
 
 .Form {
