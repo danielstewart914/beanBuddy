@@ -71,6 +71,7 @@ ol, ul {
   border-radius: var(--base-border-radius);
   margin: var(--base-margin);
   background-color: var(--light);
+  box-shadow: var(--base-box-shadow);
 }
 
 .Page {
