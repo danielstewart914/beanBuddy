@@ -30,6 +30,7 @@ query getCoffee($coffeeId: ID!) {
     _id
     beanType
     brand
+    image
     fullFlavorProfile {
       roasted {
         cereal
@@ -85,6 +86,8 @@ query getCoffee($coffeeId: ID!) {
       _id
       coffeeRating
       reviewText
+      grind
+      brewMethod
     }
     roast
     simpleFlavorProfile {
@@ -101,6 +104,17 @@ query getCoffee($coffeeId: ID!) {
       green
       other
     }
+  }
+}
+`;
+
+export const ALL_COFFEE = gql`
+  query AllCoffee {
+  allCoffee {
+    _id
+    brand
+    name
+    origin
   }
 }
 `;

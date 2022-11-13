@@ -1,7 +1,7 @@
 [
     {
       "brand": "The Coffee Bean & Tea Leaf",
-      "name": "PAPUA NEW GUINEA SIGRI MEDIUM SINGLE ORIGIN ROAST COFFEE",
+      "name": "PAPUA NEW GUINEA SIGRI",
       "roast": "Medium",
       "beanType": "Arabica",
       "origin": "Papua New Guinea",
@@ -9,7 +9,7 @@
     },
     {
       "brand": "The Coffee Bean & Tea Leaf",
-      "name": "COLD BREW COARSE GROUND COFFEE BLEND WITH CHICORY",
+      "name": "COLD BREW WITH CHICORY",
       "roast": "Medium",
       "beanType": "Arabica",
       "origin": "Ethiopia",
@@ -17,7 +17,7 @@
     },
     {
       "brand":"The Coffee Bean & Tea Leaf",
-      "name":"BALI BLUE MOON SINGLE ORIGIN DARK ROAST COFFEE",
+      "name":"BALI BLUE MOON",
       "roast":"Dark",
       "beanType":"Arabica",
       "origin":"Indonesia",
@@ -25,7 +25,7 @@
     },
     {
       "brand":"The Coffee Bean & Tea Leaf",
-      "name":"COSTA RICA LA CASCADA TARRAZU MEDIUM ROAST SINGLE ORIGIN COFFEE",
+      "name":"COSTA RICA LA CASCADA TARRAZU",
       "roast":"Medium",
       "beanType":"Arabica",
       "origin":"Costa Rica",
@@ -33,7 +33,7 @@
     },
     {
       "brand":"The Coffee Bean & Tea Leaf",
-      "name": "BRAZIL CERRADO LIGHT ROAST SINGLE ORIGIN COFFEE",
+      "name": "BRAZIL CERRADO",
       "roast":"Light",
       "beanType":"Arabica",
       "origin":"Brazil",
@@ -41,7 +41,7 @@
     },
     {
       "brand":"The Coffee Bean & Tea Leaf",
-      "name":"COOKIE BUTTER MEDIUM ROAST GROUND COFFEE - LIMITED EDITION",
+      "name":"COOKIE BUTTER GROUND COFFEE - LIMITED EDITION",
       "roast":"Medium",
       "beanType":"Arabica",
       "origin":"Colombia",

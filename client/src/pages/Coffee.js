@@ -19,6 +19,12 @@ const Coffee = () => {
     });
 
     const coffee = data?.coffee || {};
+
+    const imagePlaceholder = process.env.PUBLIC_URL + '/images/Coffee-Placeholder-Image.webp';
+
+    const onImageError = ( event ) => {
+        event.target.src = imagePlaceholder;
+    }
     
     return ( loading ? <div>Loading...</div> : 
     <Container>
@@ -27,8 +33,17 @@ const Coffee = () => {
                 <h2 className={ styles.Heading }>
                     <StarRating rating={coffee.rating} starSize={ 32 } />
                     {coffee.name}
+                    { console.log( coffee ) }
                 </h2>
                 <div className={ styles.CoffeeInfo }>
+                    <div className={ styles.Square }>
+                        <img 
+                            className={ styles.CoffeeImage }
+                            src={ coffee.image ? coffee.image : imagePlaceholder }
+                            onError={onImageError}
+                            alt={ coffee.name } 
+                        />
+                    </div>
                     <ul className={ styles.Properties }>
                         <li><span className={ styles.CoffeeProperty }>Brand / Farm: </span>{coffee.brand}</li>
                         <li><span className={ styles.CoffeeProperty }>Roast: </span>{coffee.roast}</li>
@@ -42,7 +57,7 @@ const Coffee = () => {
             </div>
             <div className={ styles.Reviews }>
                 <h3 className={ styles.ReviewsHeading }>Reviews:</h3>
-                { coffee.reviews.length ? coffee.reviews.map( review => <Review key={review._id} coffeeRating={review.coffeeRating} reviewText={ review.reviewText } />  ) : <div>No Reviews</div> }     
+                { coffee.reviews.length ? coffee.reviews.map( review => <Review key={review._id} review={ review } />  ) : <div>No Reviews</div> }     
             </div>
         </div>
     </Container>

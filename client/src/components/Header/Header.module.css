@@ -15,16 +15,30 @@
 }
 
 .Header {
+  position: relative;
   display: flex;
   flex-direction: column;
   color: var( --light );
   margin-bottom: 2rem;
-  background: url("./Coffee-Bean-Background.webp") no-repeat center center;
+  align-items: center;
+  border-bottom: 8px solid var(--dark);
+}
+
+.Header:after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  z-index: -1;
+  background: url("./Coffee-Bean-Background.webp") center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  align-items: center;
+  background-position: center;
+  background-size: 110%;
 }
 
 .SubHeading {

@@ -1,0 +1,65 @@
+.Input {
+  display: inline-block;
+  padding: var(--base-padding);
+  margin: var(--base-margin);
+  box-shadow: var(--base-box-shadow);
+  max-width: 20rem
+}
+
+.Label {
+  font-weight: 600;
+  padding: var(--base-padding);
+}
+
+.Main {
+  display: flex;
+  flex-direction: column;
+  background-color: #D9D6D1cc;
+  width: 90%;
+  padding: var(--base-padding);
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--base-padding);
+}
+
+.TextArea {
+  width: 20rem;
+  height: 6rem;
+  display: inline-block;
+  padding: var(--base-padding);
+  margin: var(--base-margin);
+  box-shadow: var(--base-box-shadow);
+}
+
+.Footer {
+  width: 100%;
+}
+
+.Row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.FormGroup {
+  margin: var(--base-margin);
+}
+
+@media screen and (min-Width: 800px) {
+  .Row {
+    flex-wrap: nowrap;
+  }
+  .TextArea {
+    width: 30rem;
+  }
+}

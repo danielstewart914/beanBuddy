@@ -100,6 +100,7 @@ const typeDefs = gql`
     roast: String
     beanType: String
     origin: String
+    image: String
     fullFlavorProfile: FullFlavorProfile
     simpleFlavorProfile: SimpleFlavorProfile
     rating: Int
@@ -110,6 +111,7 @@ const typeDefs = gql`
     _id: ID
     coffeeRating: Int
     grind: String
+    brewMethod: String
     reviewText: [String]
     image: String
     flavorProfile: FullFlavorProfile
@@ -125,6 +127,7 @@ const typeDefs = gql`
   input ReviewInput {
     coffeeRating: Int!
     grind: String
+    brewMethod: String
     reviewText: String!
     flavorProfile: FullFlavorProfileInput!
   }
@@ -232,7 +235,7 @@ const typeDefs = gql`
 
     # review mutations
     addReview( coffeeId: ID! newReview: ReviewInput! ): Review
-    addReviewImage( reviewId: ID! ): Review
+    addReviewImage( reviewId: ID!, ext: String! ): String
     updateReview( reviewUpdate: UpdatedReviewInput! ): Review
     deleteReview( reviewId: ID! ): Boolean
 

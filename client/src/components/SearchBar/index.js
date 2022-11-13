@@ -19,9 +19,9 @@ const SearchBar = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={ styles.SearchBar } onSubmit={handleSubmit}>
       <input 
-        className={ styles.SearchBar }
+        className={ styles.SearchInput }
         type='text'
         placeholder='Search'
         onChange={handleInputChange}

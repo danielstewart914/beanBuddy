@@ -1,0 +1,15 @@
+.FlavorInput {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.Label {
+  font-weight: 600;
+  text-align: center;
+}
+
+.Hidden {
+  visibility: hidden;
+}

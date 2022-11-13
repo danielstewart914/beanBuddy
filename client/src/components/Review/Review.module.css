@@ -1,0 +1,11 @@
+.Header {
+  display: flex;
+}
+
+.Info {
+  margin: 0 var(--base-margin);
+}
+
+.SemiBold {
+  font-weight: 550;
+}

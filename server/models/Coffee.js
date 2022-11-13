@@ -82,6 +82,13 @@ coffeeSchema.virtual( 'rating' ).get( async function () {
   }
 } );
 
+coffeeSchema.virtual( 'image' ).get( async function () {
+  if ( this.reviews.length ) {
+    const images = this.reviews.map( review => review.image ).filter( imageURL => imageURL.length );
+    return images[ Math.floor( Math.random() * images.length ) ];
+  }
+} );
+
 const Coffee = model('Coffee', coffeeSchema);
 
 module.exports = Coffee;
