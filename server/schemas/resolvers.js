@@ -1,4 +1,4 @@
-require( 'dotenv' ).config();
+// require( 'dotenv' ).config();
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 const { 
