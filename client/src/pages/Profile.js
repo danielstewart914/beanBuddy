@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
-import { DELETE_USER } from '../utils/mutations';
+import { DELETE_USER, UPDATE_USER_EMAIL, UPDATE_USER_PASSWORD } from '../utils/mutations';
 import Auth from '../utils/auth';
 import Container from 'react-bootstrap/esm/Container';
-// import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal'
 
-
 import styles from './Profile.module.css';
 import Button from 'react-bootstrap/Button';
-// import { valueFromAST } from 'graphql';
-// import { UPDATE_USER_EMAIL, UPDATE_USER_PASSWORD } from '../utils/mutations';
-
-
 
 const Profile = () => {
 
@@ -24,9 +18,64 @@ const Profile = () => {
   const user = data?.me || {};
   const [deleteUser] = useMutation(DELETE_USER);
 
+  const [editEmail, setEditEmail] = useState(false);
+  const [newEmail, setNewEmail] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
+  const [updateEmail] = useMutation(UPDATE_USER_EMAIL, {
+    variables: {email: newEmail}
+  });
+
+  const handleEmailFormChange = (event) => {
+    setNewEmail(event.target.value);
+    setEmailErrorMessage('');
+  };
+
+  const toggleEditEmail = () => {
+    setEditEmail(editEmail ? false : true)
+  };
+
+  const handleEmailSubmission = (event) => {
+    event.preventDefault();
+    if (/.+@.+\..+/.test(newEmail)) {
+      updateEmail();
+      toggleEditEmail();
+    } else {
+      setEmailErrorMessage('Please enter a valid email.')
+    }
+  };
+
+  const [editPassword, setEditPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+
+  const [updatePassword] = useMutation(UPDATE_USER_PASSWORD, {
+    variables: {password: newPassword}
+  });
+
+  const handlePasswordFormChange = (event) => {
+    setNewPassword(event.target.value);
+    setPasswordErrorMessage('');
+  };
+
+  const toggleEditPassword = () => {
+    setEditPassword(editPassword ? false : true)
+  };
+
+  const handlePasswordSubmission = (event) => {
+    event.preventDefault();
+    if (/.{5,15}/.test(newPassword)) {
+      updatePassword();
+      console.log(newPassword);
+      toggleEditPassword();
+    } else {
+      setPasswordErrorMessage('Password must be between 5 & 15 characters.')
+    }
+  };
+
   if (!Auth.loggedIn()) {
     return <Navigate to='/login' />;
-  }
+  };
   
   const handleDeleteUser = async () => {
       try {
@@ -39,14 +88,9 @@ const Profile = () => {
   }
 };
 
-
-
-
   if (loading) {
     return <div>Loading...</div>;
   }
-
-
 
   const DeleteModal = () => {
 
@@ -68,8 +112,8 @@ const Profile = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="primary" onClick={handleDeleteModalClose}>Do Not Delete</Button>
-          <Button variant="secondary" onClick = {handleDeleteUser} >Delete Profile</Button>
+          <Button variant="primary" onClick={handleDeleteModalClose} className={styles.Button}>Do Not Delete</Button>
+          <Button variant="secondary" onClick = {handleDeleteUser} className={styles.Button}>Delete Profile</Button>
         </Modal.Footer>
       </Modal>
       :
@@ -80,49 +124,11 @@ const Profile = () => {
     }
     </>
    )
-
   };
 
-  
-  
-
-
-
-  // const updateProfile = async (useState) => {
-  //   const [formState, setFormState] = useState({
-  //     email: '',
-  //     password: '',
-  //   });
-  //   const [updateEmail, {error, data }] = useMutation(UPDATE_USER_EMAIL);
-  //   const [updatePassword, {error, data}] = useMutation(UPDATE_USER_PASSWORD);
-
-  //   const handleChange = (event) => {
-  //     const { email, password } = event.target;
-
-  //     setFormState({
-  //       ...formState,
-  //       [email]: value,
-  //       [password]: value,
-  //     });
-  //   };
-
-  //   const handleFormSubmit = async (event) => {
-  //     event.preventDefault();
-  //     console.log(formState);
-
-  //     try {
-  //       const { email } = await updateEmail({
-  //         variables: {...formState },
-  //       });
-  //       const { password } = await updatePassword({
-  //         variables: {...formState }
-  //       });
-  //       Auth.login(data.token);
-  //     } catch (e) {
-  //       console.error(e);
-  //     }
-  //   };
-  // };
+  const bullets = () => {
+    return [...Array(12)].map( ( e, i ) => <span key={ i }>&bull;</span> )
+  };
 
   return (
     <Container className={styles.Container}>
@@ -131,29 +137,65 @@ const Profile = () => {
       </h2>
       <br/>
       <br/>
-        <h4>
+        <h4 className={styles.Prompt}>
           What would you like to do?
         </h4>
         <br/>
         <br/>
       <Col>
-        <Button
-        className='Button'
-        >
-          Update Email
-          </Button>
+        {
+          editEmail ? (
+            <> 
+              <div>
+                <input type='text' onChange={handleEmailFormChange}/>
+                <button className='Button' onClick={handleEmailSubmission}>Update Email</button>
+                <button className='CancelButton' onClick={toggleEditEmail}>Cancel</button>
+              </div>
+              <div>{ emailErrorMessage }</div>
+            </>
+            )
+          :
+            (
+              <>
+              <span className={ styles.Label }>{user.email}</span>
+              <button
+                className='Button' onClick={toggleEditEmail}
+              >
+                Update Email
+              </button> 
+            </>
+            )
+        }
       </Col>
       <Col>
-        <Button className='Button'
-        >
-          Update Password
-          </Button>
+        {
+          editPassword ? (
+            <> 
+              <div>
+                <input type='password' onChange={handlePasswordFormChange}/>
+                <button className='Button' onClick={handlePasswordSubmission}>Update Password</button>
+                <button className='CancelButton' onClick={toggleEditPassword}>Cancel</button>
+              </div>
+              <div>{ passwordErrorMessage }</div>
+            </>
+            )
+          :
+            (
+              <> 
+              <span className={ styles.Label }>{ bullets() }</span> 
+              <button
+                className='Button' onClick={toggleEditPassword}
+              >
+                Update Password
+              </button> 
+            </>
+            )
+        }
       </Col>
       <Col>
         <DeleteModal />
       </Col>
-      </Container>
-      
+    </Container>
   );
 };
 

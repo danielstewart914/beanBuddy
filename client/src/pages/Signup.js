@@ -13,7 +13,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import styles from './Signup.module.css';
+import styles from './Signup-Login.module.css';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -52,7 +52,7 @@ const Signup = () => {
       <Row className='justify-content-center mb-4'>
         <Col xs={12} lg={10}>
           <Card className='card rounded-0'>
-            <Card.Title className='card-header bg-dark text-light p-2 rounded-0'>Sign Up</Card.Title>
+            <Card.Title className={ styles.Title }>Sign Up</Card.Title>
             <Card.Body>
               {data ? (
                 <p>
@@ -64,7 +64,7 @@ const Signup = () => {
                   <Row xs={1} md={2} lg={3}>
                     <Col>
                       <Form.Control
-                        className={ styles.Signup }
+                        className={ styles.Input }
                         placeholder='Your username'
                         name='username'
                         type='text'
@@ -74,7 +74,7 @@ const Signup = () => {
                     </Col>
                     <Col>
                       <Form.Control
-                        className={ styles.Signup }
+                        className={ styles.Input }
                         placeholder='Your email'
                         name='email'
                         type='email'
@@ -84,7 +84,7 @@ const Signup = () => {
                     </Col>
                     <Col>            
                       <Form.Control
-                        className={ styles.Signup }
+                        className={ styles.Input }
                         placeholder='password'
                         name='password'
                         type='password'
@@ -107,7 +107,7 @@ const Signup = () => {
               )}
 
               {error && (
-                <div className='my-3 p-3 bg-danger text-white'>
+                <div>
                   {error.message}
                 </div>
               )}

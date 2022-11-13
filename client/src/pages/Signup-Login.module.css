@@ -1,5 +1,11 @@
-.Login {
+.Title {
+  font-size: 1.5rem;
+  margin: var(--base-margin);
+}
+
+.Input {
     display: inline-block;
     padding: var(--base-padding);
+    margin: var(--base-margin);
     box-shadow: var(--base-box-shadow);
   }

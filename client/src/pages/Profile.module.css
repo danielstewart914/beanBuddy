@@ -4,10 +4,39 @@
 }
 .Header {
   font-size: 2rem;
+  font-weight: 550;
   text-align: center;
 }
+.Prompt {
+  font-weight: 550;
+}
 .Modal {
+  font-weight: 550;
+  margin: auto;
+  padding: 30px;
   text-align: center;
-  background-color: white;
-  width: 50;
+  background-color: var(--light-grey);
+  width: 25%;
+  overflow: auto;
+  box-shadow: var(--base-box-shadow);
+
+}
+.Link-Button, .Button {
+  margin: var(--base-margin);
+  text-decoration: none;
+  color: var(--light);
+  display: inline-block;
+  padding: var(--base-padding) calc( var(--base-padding) * 2 );
+  border: 2px solid var(--light);
+  background-color: var(--dark-brown);
+  box-shadow: var(--base-box-shadow);
+}
+
+.Link-Button:hover, .Link-Button:focus, .Button:hover, .Button:focus {
+  background-color: var(--light-brown);
+}
+
+.Label {
+  font-weight: 600;
+  font-size: 1.5rem;
 }
