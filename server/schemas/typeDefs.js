@@ -233,7 +233,7 @@ const typeDefs = gql`
 
     # review mutations
     addReview( coffeeId: ID! newReview: ReviewInput! ): Review
-    addReviewImage( reviewId: ID! ): Review
+    addReviewImage( reviewId: ID! ): String
     updateReview( reviewUpdate: UpdatedReviewInput! ): Review
     deleteReview( reviewId: ID! ): Boolean
 
