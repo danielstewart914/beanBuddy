@@ -3,6 +3,7 @@
   padding: var(--base-padding);
   margin: var(--base-margin);
   box-shadow: var(--base-box-shadow);
+  max-width: 20rem
 }
 
 .Label {

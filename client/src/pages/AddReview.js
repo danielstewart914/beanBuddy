@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_REVIEW } from "../utils/mutations";
 
 import StarRatingInput from "../components/StarRatingInput";
@@ -11,58 +7,73 @@ import FlavorInput from "../components/FlavorInput";
 import { formatFlavor } from "../utils/flavorUtils";
 
 import styles from './AddReview.module.css';
+import { ALL_COFFEE } from "../utils/queries";
+
+import Auth from '../utils/auth';
+import { Navigate } from 'react-router-dom';
 
 const AddReview = () => {
+
+  const { loading, data } = useQuery( ALL_COFFEE );
+
+  const [addReview] = useMutation(ADD_REVIEW);
+
   const [formState, setFormState] = useState({
-    coffee: "",
-    grind: "Espresso",
-    brewMethod: "Drip",
+    coffeeId: "",
+    grind: "",
+    brewMethod: "",
     reviewText: "",
     image: "",
   });
   
- const [rating, setRating] = useState(1);
- const [ flavorProfile, setFlavorProfile ] = useState(
-  {
-    cereal: { value: 0, dislike: false },
-    burnt: { value: 0, dislike: false },
-    tobacco: { value: 0, dislike: false },
-    nutmeg: { value: 0, dislike: false },
-    cinnamon: { value: 0, dislike: false },
-    clove: { value: 0, dislike: false },
-    pepper: { value: 0, dislike: false },
-    pungent: { value: 0, dislike: false },
-    nutty: { value: 0, dislike: false },
-    chocolate: { value: 0, dislike: false },
-    darkChocolate: { value: 0, dislike: false },
-    honey: { value: 0, dislike: false },
-    caramel: { value: 0, dislike: false },
-    mapleSyrup: { value: 0, dislike: false },
-    molasses: { value: 0, dislike: false },
-    vanilla: { value: 0, dislike: false },
-    overallSweet: { value: 0, dislike: false },
-    sweetAromatics: { value: 0, dislike: false },
-    floral: { value: 0, dislike: false },
-    blackTea: { value: 0, dislike: false },
-    berry: { value: 0, dislike: false },
-    driedFruit: { value: 0, dislike: false },
-    citrusFruit: { value: 0, dislike: false },
-    otherFruit: { value: 0, dislike: false },
-    sour: { value: 0, dislike: false },
-    fermented: { value: 0, dislike: false },
-    oliveOil: { value: 0, dislike: false },
-    raw: { value: 0, dislike: false },
-    vegetative: { value: 0, dislike: false },
-    beany: { value: 0, dislike: false },
-    paperyMusty: { value: 0, dislike: false },
-    chemical: { value: 0, dislike: false },
-  }
-);
+  const [rating, setRating] = useState(1);
+  const [ flavorProfile, setFlavorProfile ] = useState(
+    {
+      cereal: { value: 0, dislike: false },
+      burnt: { value: 0, dislike: false },
+      tobacco: { value: 0, dislike: false },
+      nutmeg: { value: 0, dislike: false },
+      cinnamon: { value: 0, dislike: false },
+      clove: { value: 0, dislike: false },
+      pepper: { value: 0, dislike: false },
+      pungent: { value: 0, dislike: false },
+      nutty: { value: 0, dislike: false },
+      chocolate: { value: 0, dislike: false },
+      darkChocolate: { value: 0, dislike: false },
+      honey: { value: 0, dislike: false },
+      caramel: { value: 0, dislike: false },
+      mapleSyrup: { value: 0, dislike: false },
+      molasses: { value: 0, dislike: false },
+      vanilla: { value: 0, dislike: false },
+      overallSweet: { value: 0, dislike: false },
+      sweetAromatics: { value: 0, dislike: false },
+      floral: { value: 0, dislike: false },
+      blackTea: { value: 0, dislike: false },
+      berry: { value: 0, dislike: false },
+      driedFruit: { value: 0, dislike: false },
+      citrusFruit: { value: 0, dislike: false },
+      otherFruit: { value: 0, dislike: false },
+      sour: { value: 0, dislike: false },
+      fermented: { value: 0, dislike: false },
+      oliveOil: { value: 0, dislike: false },
+      raw: { value: 0, dislike: false },
+      vegetative: { value: 0, dislike: false },
+      beany: { value: 0, dislike: false },
+      paperyMusty: { value: 0, dislike: false },
+      chemical: { value: 0, dislike: false },
+    }
+  );
 
-  const [addReview] = useMutation(ADD_REVIEW);
+  if (!Auth.loggedIn()) {
+    return <Navigate to='/login' />;
+  };
+
+  const coffees = data?.allCoffee || {};
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    console.log( name, value )
 
     setFormState({
       ...formState,
@@ -70,7 +81,7 @@ const AddReview = () => {
     });
   };
 
-  const handleChangeFlavorChange = ( event ) => {
+  const handleFlavorChange = ( event ) => {
     const { name, value } = event.target;
     setFlavorProfile( 
       {
@@ -92,9 +103,12 @@ const AddReview = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    if ( !formState.coffeeId || !formState.reviewText ) return;
+
     try {
       const newReview = {
-        coffeeId: "636ab830620708dc1b9ec94b",
+        coffeeId: formState.coffeeId,
         newReview: {
           coffeeRating: rating,
           flavorProfile: {
@@ -151,6 +165,8 @@ const AddReview = () => {
         }
       }
 
+      console.log( newReview )
+
       const { data } = await addReview({
         variables: { ...newReview },
       });
@@ -170,51 +186,66 @@ const AddReview = () => {
           <div className={ styles.Col }>
             <div className={ styles.FormGroup }>
               <label className={ styles.Label } htmlFor="coffee">Coffee</label><br />
-              <Form.Control
-                type="text"
-                name="coffee"
-                placeholder="Coffee"
-                value={formState.coffee}
+              { 
+                loading 
+                  ? 
+                  <>
+                    <span>Loading Coffee...</span>
+                  </> : (
+              <>
+                <select
+                className={ styles.Input }
+                name="coffeeId"
+                value={formState.coffeeId}
                 onChange={handleChange}
-              />
+              >
+                <option defaultValue=''>Select a Coffee</option>
+                {
+                  coffees.map( coffee => <option value={ coffee._id } key={ coffee._id }>{ coffee.name } - { coffee.brand }</option> )
+                }
+                </select>
+              </>
+              ) }
             </div>
             <div className={ styles.FormGroup }>
-            <Form.Label className={ styles.Label } htmlFor="rating">Rating</Form.Label><br />
+            <label className={ styles.Label }  htmlFor="rating">Rating</label><br />
               <StarRatingInput rating={rating} setRating={setRating}/>
             </div>
             <div className={ styles.FormGroup }>
-              <Form.Label className={ styles.Label } htmlFor="grind">Grind</Form.Label><br />
-              <Form.Select
+              <label className={ styles.Label } htmlFor="grind">Grind</label><br />
+              <select
                 className={ styles.Input }
                 name="grind"
                 value={formState.grind}
                 onChange={handleChange}
               >
+                <option defaultValue=''>Select a Grind</option>
                 <option value="Espresso">Espresso</option>
                 <option value="Fine">Fine</option>
                 <option value="Medium">Medium</option>
                 <option value="Course">Course</option>
-              </Form.Select>
+              </select>
             </div>
             <div className={ styles.FormGroup }>
-              <Form.Label className={ styles.Label } htmlFor="brewMethod">Brew Method</Form.Label><br />
-              <Form.Select
+              <label className={ styles.Label } htmlFor="brewMethod">Brew Method</label><br />
+              <select
                 className={ styles.Input }
                 name="brewMethod"
                 value={formState.brewMethod}
                 onChange={handleChange}
               >
+                <option defaultValue=''>Select Brew Method</option>
                 <option value="Drip">Drip</option>
                 <option value="Espresso">Espresso</option>
                 <option value="French Press">French Press</option>
                 <option value="Siphon">Siphon</option>
                 <option value="Cold Brew">Cold Brew</option>
                 <option value="Pour Over">Pour Over</option>
-              </Form.Select>
+              </select>
             </div>
             <div className={ styles.FormGroup }>
-              <Form.Label className={ styles.Label } htmlFor="reviewText">Review Text</Form.Label><br />
-              <Form.Control
+              <label className={ styles.Label } htmlFor="reviewText">Review Text</label><br />
+              <textarea
                 className={ styles.TextArea }
                 as={"textarea"}
                 value={formState.reviewText}
@@ -223,15 +254,15 @@ const AddReview = () => {
               />
             </div>
             <div className={ styles.FormGroup }>
-              <Form.Label className={ styles.Label } htmlFor="image">Image</Form.Label><br />
-              <Form.Control
+              <label className={ styles.Label } htmlFor="image">Image</label><br />
+              <input
                 type="file"
               />
             </div>
           </div>
           <FlavorInput 
             flavorProfile={flavorProfile} 
-            handleChangeFlavorChange={handleChangeFlavorChange} 
+            handleFlavorChange={handleFlavorChange} 
             handleDislikeChange={handleDislikeChange}
           />
         </div>

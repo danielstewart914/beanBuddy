@@ -14,7 +14,7 @@ const sliderStyle = {
   }
 }
 
-const FlavorInput = ( { flavorProfile, handleChangeFlavorChange, handleDislikeChange } ) => {
+const FlavorInput = ( { flavorProfile, handleFlavorChange, handleDislikeChange } ) => {
   const flavors = [
     { label: 'Cereal', name: 'cereal' },
     { label: 'Burnt', name: 'burnt' },
@@ -65,7 +65,7 @@ const FlavorInput = ( { flavorProfile, handleChangeFlavorChange, handleDislikeCh
         min={0}
         max={5}
         value={flavorProfile[flavor.name].value}
-        onChange={handleChangeFlavorChange}
+        onChange={handleFlavorChange}
       />
       <div className={ styles.Label }>
         { flavor.label }

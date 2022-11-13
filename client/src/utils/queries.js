@@ -105,6 +105,17 @@ query getCoffee($coffeeId: ID!) {
 }
 `;
 
+export const ALL_COFFEE = gql`
+  query AllCoffee {
+  allCoffee {
+    _id
+    brand
+    name
+    origin
+  }
+}
+`;
+
 export const QUERY_USER_FLAVOR_PROFILES = gql`
   query UserFlavorProfiles {
   me {
