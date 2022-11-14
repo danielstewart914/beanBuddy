@@ -39,7 +39,7 @@
   padding: 30px;
   text-align: center;
   background-color: var(--light-grey);
-  width: 25%;
+  width: 80%;
   overflow: auto;
   box-shadow: var(--base-box-shadow);
 
@@ -48,4 +48,21 @@
 .Label {
   font-weight: 600;
   font-size: 1.5rem;
+}
+
+
+@media screen and (min-Width: 1200px) {
+  .Modal {
+    width: 25%;  
+  }
+}
+@media screen and (min-Width: 800px) {
+  .Modal {
+    width: 40%;  
+  }
+}
+@media screen and (min-Width: 600px) {
+  .Modal {
+    width: 60%;  
+  }
 }
