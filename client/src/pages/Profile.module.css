@@ -45,9 +45,19 @@
   font-size: 1.5rem;
 }
 
+
+@media screen and (min-Width: 1200px) {
+  .Modal {
+    width: 25%;  
+  }
+}
+@media screen and (min-Width: 800px) {
+  .Modal {
+    width: 40%;  
+  }
+}
 @media screen and (min-Width: 600px) {
   .Modal {
-    width: 50%;
-    /* flex-wrap: nowrap; */
+    width: 60%;  
   }
 }
