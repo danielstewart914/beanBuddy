@@ -83,8 +83,8 @@ coffeeSchema.virtual( 'rating' ).get( async function () {
 } );
 
 coffeeSchema.virtual( 'image' ).get( async function () {
-  if ( this.reviews.length ) {
-    const images = this.reviews.map( review => review.image ).filter( imageURL => imageURL.length );
+  if ( this.reviews ) {
+    const images = this.reviews.map( review => review.image ).filter( imageURL => imageURL ? true : false );
     return images[ Math.floor( Math.random() * images.length ) ];
   }
 } );

@@ -11,6 +11,7 @@ import { ALL_COFFEE } from "../utils/queries";
 
 import Auth from '../utils/auth';
 import { Navigate, useNavigate } from 'react-router-dom';
+import AddCoffeeDialog from "../components/AddCoffeeDialog";
 
 const AddReview = () => {
 
@@ -19,6 +20,8 @@ const AddReview = () => {
   const { loading, data } = useQuery( ALL_COFFEE );
   const [addReviewImage] = useMutation( ADD_REVIEW_IMAGE );
   const [addReview] = useMutation(ADD_REVIEW);
+
+  const [ errorMessage, setErrorMessage ] = useState('');
 
   const [formState, setFormState] = useState({
     coffeeId: "",
@@ -66,6 +69,7 @@ const AddReview = () => {
   );
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   if (!Auth.loggedIn()) {
     return <Navigate to='/login' />;
@@ -75,7 +79,7 @@ const AddReview = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    setErrorMessage('');
     setFormState({
       ...formState,
       [name]: value,
@@ -99,13 +103,34 @@ const AddReview = () => {
         [name]: { dislike: checked, value: flavorProfile[name].value }
       }
     )
-    
-  }
+  };
+
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = ( newId ) => {
+    setOpenDialog(false);
+    setFormState( 
+      {
+        ...formState,
+        coffeeId: newId,
+      }
+     );
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if ( !formState.coffeeId || !formState.reviewText ) return;
+    if ( !formState.coffeeId )  {
+      setErrorMessage( 'You must Select a Coffee to Review!' );
+      return;
+    }
+
+    if ( !formState.reviewText )  {
+      setErrorMessage( 'You must Enter Review Text!' );
+      return;
+    }
 
     try {
       const newReview = {
@@ -188,10 +213,9 @@ const AddReview = () => {
             headers: { 'Content-Type': 'application/octet-stream' }
           }
         );
-
-        navigate( `/coffee/${ newReview.coffeeId }` )
-
       }
+
+      navigate( `/coffee/${ newReview.coffeeId }` );
 
     } catch (e) {
       console.error(e);
@@ -207,7 +231,7 @@ const AddReview = () => {
         <div className={ styles.Row }>
           <div className={ styles.Col }>
             <div className={ styles.FormGroup }>
-              <label className={ styles.Label } htmlFor="coffee">Coffee</label><br />
+              <label className={ styles.Label } htmlFor="coffee">Coffee</label>
               { 
                 loading 
                   ? 
@@ -221,27 +245,30 @@ const AddReview = () => {
                 value={formState.coffeeId}
                 onChange={handleChange}
               >
-                <option defaultValue=''>Select a Coffee</option>
+                <option defaultValue='' hidden>Select a Coffee</option>
                 {
                   coffees.map( coffee => <option value={ coffee._id } key={ coffee._id }>{ coffee.name } - { coffee.brand }</option> )
                 }
-                </select>
+                </select><br />
+                <span className={ styles.Label }>
+                Or
+                </span><button className='Button' onClick={handleClickOpenDialog}>Add New Coffee</button>
               </>
               ) }
             </div>
             <div className={ styles.FormGroup }>
-            <label className={ styles.Label }  htmlFor="rating">Rating</label><br />
+            <label className={ styles.Label }  htmlFor="rating">Rating</label>
               <StarRatingInput rating={rating} setRating={setRating}/>
             </div>
             <div className={ styles.FormGroup }>
-              <label className={ styles.Label } htmlFor="grind">Grind</label><br />
+              <label className={ styles.Label } htmlFor="grind">Grind</label>
               <select
                 className={ styles.Input }
                 name="grind"
                 value={formState.grind}
                 onChange={handleChange}
               >
-                <option defaultValue=''>Select a Grind</option>
+                <option defaultValue='' hidden>Select a Grind</option>
                 <option value="Espresso">Espresso</option>
                 <option value="Fine">Fine</option>
                 <option value="Medium">Medium</option>
@@ -249,14 +276,14 @@ const AddReview = () => {
               </select>
             </div>
             <div className={ styles.FormGroup }>
-              <label className={ styles.Label } htmlFor="brewMethod">Brew Method</label><br />
+              <label className={ styles.Label } htmlFor="brewMethod">Brew Method</label>
               <select
                 className={ styles.Input }
                 name="brewMethod"
                 value={formState.brewMethod}
                 onChange={handleChange}
               >
-                <option defaultValue=''>Select Brew Method</option>
+                <option defaultValue='' hidden>Select Brew Method</option>
                 <option value="Drip">Drip</option>
                 <option value="Espresso">Espresso</option>
                 <option value="French Press">French Press</option>
@@ -266,7 +293,7 @@ const AddReview = () => {
               </select>
             </div>
             <div className={ styles.FormGroup }>
-              <label className={ styles.Label } htmlFor="reviewText">Review Text</label><br />
+              <label className={ styles.Label } htmlFor="reviewText">Review Text</label>
               <textarea
                 className={ styles.TextArea }
                 as={"textarea"}
@@ -276,7 +303,7 @@ const AddReview = () => {
               />
             </div>
             <div className={ styles.FormGroup }>
-              <label className={ styles.Label } htmlFor="image">Image</label><br />
+              <label className={ styles.Label } htmlFor="image">Image</label>
               <input 
                 type="file" 
                 accept="image/*" 
@@ -291,6 +318,9 @@ const AddReview = () => {
           />
         </div>
         <div className={ styles.Footer }>
+          <div className={ styles.Error }>
+            { errorMessage }
+          </div>
           <button
             className='Button'
             type="submit"
@@ -299,6 +329,11 @@ const AddReview = () => {
           </button>
         </div>
       </form>
+      <AddCoffeeDialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        styles={styles}
+      />
     </main>
   );
 };

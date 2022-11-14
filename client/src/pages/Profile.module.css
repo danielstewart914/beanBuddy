@@ -6,14 +6,33 @@
   width: 90%;
   padding: var(--base-padding);
 }
+
 .Header {
   font-size: 2rem;
   font-weight: 550;
   text-align: center;
 }
+
 .Prompt {
   font-weight: 550;
 }
+
+.Input {
+  display: inline-block;
+  padding: var(--base-padding);
+  margin: var(--base-margin);
+  box-shadow: var(--base-box-shadow);
+}
+
+.UserInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  border: 2px solid black;
+}
+
 .Modal {
   font-weight: 550;
   margin: auto;
@@ -24,20 +43,6 @@
   overflow: auto;
   box-shadow: var(--base-box-shadow);
 
-}
-.Link-Button, .Button {
-  margin: var(--base-margin);
-  text-decoration: none;
-  color: var(--light);
-  display: inline-block;
-  padding: var(--base-padding) calc( var(--base-padding) * 2 );
-  border: 2px solid var(--light);
-  background-color: var(--dark-brown);
-  box-shadow: var(--base-box-shadow);
-}
-
-.Link-Button:hover, .Link-Button:focus, .Button:hover, .Button:focus {
-  background-color: var(--light-brown);
 }
 
 .Label {

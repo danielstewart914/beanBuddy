@@ -70,6 +70,10 @@ ol, ul {
   background-color: #871512;
 }
 
+.CancelButton:hover, .CancelButton:focus {
+  background-color: #963330;
+}
+
 .Link-Button:hover, .Link-Button:focus, .Button:hover, .Button:focus {
   background-color: var(--light-brown);
 }
@@ -84,7 +88,7 @@ ol, ul {
 }
 
 .Page {
-  padding-bottom: 110px;
+  padding-bottom: 125px;
   display: flex;
   justify-content: center;
 }

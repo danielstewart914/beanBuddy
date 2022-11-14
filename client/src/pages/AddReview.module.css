@@ -51,8 +51,22 @@
   align-items: center;
 }
 
+.Header {
+  font-size: 2rem;
+  text-align: center;
+  color: #fff;
+  background-color: var(--dark);
+}
+
 .FormGroup {
   margin: var(--base-margin);
+  display: flex;
+  flex-direction: column;
+}
+
+.Error {
+  font-weight: 550;
+  color: #871512;
 }
 
 @media screen and (min-Width: 800px) {

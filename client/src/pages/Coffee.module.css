@@ -21,6 +21,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin: 1rem;
 }
 
 .Properties {
@@ -53,7 +54,7 @@
 @media screen and (min-width: 600px) {
   .CoffeeInfo {
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
   }
   .Square {
     max-width: 250px;

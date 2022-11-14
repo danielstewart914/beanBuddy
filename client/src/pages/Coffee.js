@@ -33,7 +33,6 @@ const Coffee = () => {
                 <h2 className={ styles.Heading }>
                     <StarRating rating={coffee.rating} starSize={ 32 } />
                     {coffee.name}
-                    { console.log( coffee ) }
                 </h2>
                 <div className={ styles.CoffeeInfo }>
                     <div className={ styles.Square }>
@@ -47,8 +46,8 @@ const Coffee = () => {
                     <ul className={ styles.Properties }>
                         <li><span className={ styles.CoffeeProperty }>Brand / Farm: </span>{coffee.brand}</li>
                         <li><span className={ styles.CoffeeProperty }>Roast: </span>{coffee.roast}</li>
-                        <li><span className={ styles.CoffeeProperty }>Bean: </span>{coffee.beanType}</li>
-                        <li><span className={ styles.CoffeeProperty }>Country of Origin: </span>{coffee.origin}</li>
+                        <li><span className={ styles.CoffeeProperty }>Bean: </span>{coffee.beanType || 'Unknown'}</li>
+                        <li><span className={ styles.CoffeeProperty }>Country of Origin: </span>{coffee.origin || 'Unknown'}</li>
                     </ul>
                 </div>
                 <Row className={ styles.Flavor }>
