@@ -13,3 +13,23 @@
 .Hidden {
   visibility: hidden;
 }
+
+.Header {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.Subheading {
+  font-size: 1.2rem;
+  text-align: start;
+  width: 75%;
+  margin: 1rem;
+  line-height: 1.4rem;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

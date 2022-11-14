@@ -89,8 +89,21 @@ const FlavorInput = ( { flavorProfile, handleFlavorChange, handleDislikeChange }
 
   return (
     <div>
-      <h3 className={ styles.Header }>Flavors</h3>
-      <p className={ styles.Subheading }>Select all the flavors you tasted in this coffee. Flavor intensity from 0 - None tasted to 5 - Strong Flavor</p>
+      <div className={ styles.Container }>
+        <h3 className={ styles.Header }>Flavors</h3>
+        <p className={ styles.Subheading }>
+          Select all the flavors you tasted in this coffee.
+        </p>
+        <p className={ styles.Subheading }>
+          0 - None Tasted.<br />
+          1 - Hint of Flavor Presence.<br />
+          3 - Moderate Flavor Presence.<br />
+          5 - Strong Flavor Presence.
+        </p>
+        <p>
+          Don't forget to flip the switch that appears to the Dislike position if you did not like any particular flavor.
+        </p>
+      </div>
       <div className={ styles.FlavorInput }>
         { flavors.map( ( flavor ) => sliderModule( flavor ) ) }
       </div>
