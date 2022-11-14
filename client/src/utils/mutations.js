@@ -65,3 +65,16 @@ export const ADD_REVIEW_IMAGE = gql`
   addReviewImage(reviewId: $reviewId, ext: $ext)
 }
 `;
+
+export const ADD_COFFEE = gql`
+  mutation AddCoffee($coffee: CoffeeInput!) {
+  addCoffee(coffee: $coffee) {
+    _id
+    beanType
+    brand
+    name
+    origin
+    roast
+  }
+}
+`;

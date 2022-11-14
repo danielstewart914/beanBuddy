@@ -4,7 +4,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { DELETE_USER, UPDATE_USER_EMAIL, UPDATE_USER_PASSWORD } from '../utils/mutations';
 import Auth from '../utils/auth';
-import Container from 'react-bootstrap/esm/Container';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal'
 
@@ -66,7 +65,6 @@ const Profile = () => {
     event.preventDefault();
     if (/.{5,15}/.test(newPassword)) {
       updatePassword();
-      console.log(newPassword);
       toggleEditPassword();
     } else {
       setPasswordErrorMessage('Password must be between 5 & 15 characters.')
@@ -112,8 +110,8 @@ const Profile = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="primary" onClick={handleDeleteModalClose} className={styles.Button}>Do Not Delete</Button>
-          <Button variant="secondary" onClick = {handleDeleteUser} className={styles.Button}>Delete Profile</Button>
+          <button onClick={handleDeleteModalClose} className='Button'>Do Not Delete</button>
+          <button onClick = {handleDeleteUser} className='CancelButton'>Delete Profile</button>
         </Modal.Footer>
       </Modal>
       :
@@ -142,12 +140,12 @@ const Profile = () => {
         </h4>
         <br/>
         <br/>
-      <Col>
+      <Col className={ styles.UserInfo }>
         {
           editEmail ? (
             <> 
-              <div>
-                <input type='text' onChange={handleEmailFormChange}/>
+              <div style={ { textAlign: 'center' } }>
+                <input className={ styles.Input } type='text' onChange={handleEmailFormChange}/>
                 <button className='Button' onClick={handleEmailSubmission}>Update Email</button>
                 <button className='CancelButton' onClick={toggleEditEmail}>Cancel</button>
               </div>
@@ -167,12 +165,12 @@ const Profile = () => {
             )
         }
       </Col>
-      <Col>
+      <Col className={ styles.UserInfo }>
         {
           editPassword ? (
             <> 
-              <div>
-                <input type='password' onChange={handlePasswordFormChange}/>
+              <div style={ { textAlign: 'center' } }>
+                <input className={ styles.Input } type='password' onChange={handlePasswordFormChange}/>
                 <button className='Button' onClick={handlePasswordSubmission}>Update Password</button>
                 <button className='CancelButton' onClick={toggleEditPassword}>Cancel</button>
               </div>
@@ -182,12 +180,12 @@ const Profile = () => {
           :
             (
               <> 
-              <span className={ styles.Label }>{ bullets() }</span> 
-              <button
-                className='Button' onClick={toggleEditPassword}
-              >
-                Update Password
-              </button> 
+                <span className={ styles.Label }>{ bullets() }</span> 
+                <button
+                  className='Button' onClick={toggleEditPassword}
+                >
+                  Update Password
+                </button> 
             </>
             )
         }
