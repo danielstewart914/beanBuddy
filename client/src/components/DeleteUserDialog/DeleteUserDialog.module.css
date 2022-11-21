@@ -1,0 +1,12 @@
+.Header {
+  font-size: 2rem;
+  text-align: center;
+  color: #fff;
+  background-color: var(--dark);
+  min-width: 20rem;
+}
+
+.BodyText {
+  padding: var(--base-padding);
+  text-align: center;
+}
