@@ -11,6 +11,7 @@
   font-size: 2rem;
   font-weight: 550;
   text-align: center;
+  margin-bottom: calc( var(--base-margin) * 2 );
 }
 
 .Prompt {
@@ -47,7 +48,6 @@
 
 .Label {
   font-weight: 600;
-  font-size: 1.5rem;
 }
 
 

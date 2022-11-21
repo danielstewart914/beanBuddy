@@ -2,24 +2,30 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
-import { DELETE_USER, UPDATE_USER_EMAIL, UPDATE_USER_PASSWORD } from '../utils/mutations';
+import { UPDATE_USER_EMAIL, UPDATE_USER_PASSWORD } from '../utils/mutations';
 import Auth from '../utils/auth';
-import Col from 'react-bootstrap/Col';
-import Modal from 'react-bootstrap/Modal'
+import DeleteUserDialog from '../components/DeleteUserDialog';
 
 import styles from './Profile.module.css';
-import Button from 'react-bootstrap/Button';
 
 const Profile = () => {
 
   const { loading, data } = useQuery( QUERY_ME);
 
   const user = data?.me || {};
-  const [deleteUser] = useMutation(DELETE_USER);
 
   const [editEmail, setEditEmail] = useState(false);
   const [newEmail, setNewEmail] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+  const handleClickOpenDeleteDialog = () => {
+    setOpenDeleteDialog(true);
+  }
+
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
+  }
 
   const [updateEmail] = useMutation(UPDATE_USER_EMAIL, {
     variables: {email: newEmail}
@@ -74,55 +80,10 @@ const Profile = () => {
   if (!Auth.loggedIn()) {
     return <Navigate to='/login' />;
   };
-  
-  const handleDeleteUser = async () => {
-      try {
-        await deleteUser();
-        Auth.logout(); 
-      }
-   
-  catch (err) {
-    console.error(err)
-  }
-};
 
   if (loading) {
     return <div>Loading...</div>;
   }
-
-  const DeleteModal = () => {
-
-   const [showDeleteModal, setShowDeleteModal]= useState(false);
-   const handleDeleteModalClose = () => setShowDeleteModal(false);
-   const handleDeleteModalShow = () => setShowDeleteModal(true);
-
-   return(
-    <>
-      {showDeleteModal ? 
-      
-      <Modal show={showDeleteModal} onHide={handleDeleteModalClose} dialogClassName={styles.Modal}>
-        <Modal.Header closeButton>
-          <Modal.Title>WARNING!</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <p>Do you want to delete your User Profile?</p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <button onClick={handleDeleteModalClose} className='Button'>Do Not Delete</button>
-          <button onClick = {handleDeleteUser} className='CancelButton'>Delete Profile</button>
-        </Modal.Footer>
-      </Modal>
-      :
-      <Button className='Button' onClick={handleDeleteModalShow}
-        >
-          Delete Profile
-          </Button>
-    }
-    </>
-   )
-  };
 
   const bullets = () => {
     return [...Array(12)].map( ( e, i ) => <span key={ i }>&bull;</span> )
@@ -133,14 +94,10 @@ const Profile = () => {
       <h2 className={ styles.Header }>
         Welcome Back {`${user.username}`}!.
       </h2>
-      <br/>
-      <br/>
-        <h4 className={styles.Prompt}>
-          What would you like to do?
-        </h4>
-        <br/>
-        <br/>
-      <Col className={ styles.UserInfo }>
+      <h3 className={styles.Prompt}>
+        What would you like to do?
+      </h3>
+      <div className={ styles.UserInfo }>
         {
           editEmail ? (
             <> 
@@ -164,8 +121,6 @@ const Profile = () => {
             </>
             )
         }
-      </Col>
-      <Col className={ styles.UserInfo }>
         {
           editPassword ? (
             <> 
@@ -189,10 +144,13 @@ const Profile = () => {
             </>
             )
         }
-      </Col>
-      <Col>
-        <DeleteModal />
-      </Col>
+        <button className='CancelButton' onClick={handleClickOpenDeleteDialog}>Delete My Account</button>
+      </div>
+      <DeleteUserDialog 
+          open={openDeleteDialog}
+          close={handleCloseDeleteDialog}
+          styles={styles}
+        />
     </main>
   );
 };

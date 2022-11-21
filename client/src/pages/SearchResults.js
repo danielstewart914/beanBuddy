@@ -3,8 +3,6 @@ import { COFFEE_SEARCH } from '../utils/queries';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import SearchResult from '../components/SearchResult';
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/Row';
 
 import styles from './SearchResults.module.css';
 
@@ -18,12 +16,12 @@ const SearchResults = () => {
   const results = data?.findCoffee || {};
 
   return (
-    <Container className={ styles.Container }>
+    <main className={ styles.Container }>
       <h2 className={ styles.Heading}>Results</h2>
-      <Row>
+      <div>
         { loading ? 'Loading...' : results.length ? results.map( result => <SearchResult key={ result._id } coffee={ result } /> ) : 'No Results' }
-      </Row>
-    </Container>
+      </div>
+    </main>
   );
 };
 

@@ -6,9 +6,6 @@ import Review from '../components/Review';
 import StarRating from '../components/StarRating';
 import FlavorProfileChart from '../components/FlavorProfileChart';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-
 import styles from './Coffee.module.css';
 
 
@@ -27,7 +24,7 @@ const Coffee = () => {
     }
     
     return ( loading ? <div>Loading...</div> : 
-    <Container>
+    <main>
         <div>
             <div className='Card'>
                 <h2 className={ styles.Heading }>
@@ -50,16 +47,16 @@ const Coffee = () => {
                         <li><span className={ styles.CoffeeProperty }>Country of Origin: </span>{coffee.origin || 'Unknown'}</li>
                     </ul>
                 </div>
-                <Row className={ styles.Flavor }>
+                <div className={ styles.Flavor }>
                     <FlavorProfileChart fullCoffeeFlavorProfile={ coffee.fullFlavorProfile } simpleCoffeeFlavorProfile={ coffee.simpleFlavorProfile } />
-                </Row>
+                </div>
             </div>
             <div className={ styles.Reviews }>
                 <h3 className={ styles.ReviewsHeading }>Reviews:</h3>
                 { coffee.reviews.length ? coffee.reviews.map( review => <Review key={review._id} review={ review } />  ) : <div>No Reviews</div> }     
             </div>
         </div>
-    </Container>
+    </main>
     )
 };
 
